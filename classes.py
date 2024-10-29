@@ -11,7 +11,7 @@ class Configuration:
 
 class case:
     proba : float # probabilité que l'attaquant gagne
-    nb_troupes_restantes : int # espérance des troupes restantes de l'attaquant
+    nb_troupes_restantes : float # espérance des troupes restantes de l'attaquant
 
     def __init__(self, proba, nb_troupes_restantes):
         self.proba = proba
@@ -25,3 +25,13 @@ class tableau:
     def __init__(self, config, liste_proba):
         self.config = config
         self.liste_proba = liste_proba
+
+
+case00 = case(0.1, 2.3)
+case01 = case(0.6, 5.6)
+case10 = case(0.5, 1.1)
+case11 = case(0.2, 0.5)
+
+config = Configuration([0,1,0], [1,3,0], True)
+
+tab = tableau(config, [[case00, case01], [case10, case11]])
