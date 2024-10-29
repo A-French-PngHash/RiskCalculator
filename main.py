@@ -29,7 +29,7 @@ def config():
 
 if __name__=="__main__":
     #configuration = config()
-    configuration = Configuration([0, 0, 0], [0, 0, 0], False)
+    configuration = Configuration([1, 0, 0], [0, 0, 0], False)
     risk_prob = RiskProbaCalculator(configuration)
     tab = risk_prob.compute_all(5, 5)
     image = ImageDrawingService()
