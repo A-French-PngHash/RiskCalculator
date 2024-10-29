@@ -7,13 +7,13 @@ class Configuration:
 
 
 class case:
-    gagne : bool # True si le joueur 1 gagne
+    proba : float # probabilité que le joueur 1 gagne
     nb_troupes_restantes : int # espérance des troupes restantes du joueur 1
 
-    def __init__(self, gagne, nb_troupes_restantes):
-        self.gagne = gagne
+    def __init__(self, proba, nb_troupes_restantes):
+        self.proba = proba
         self.nb_troupes_restantes = nb_troupes_restantes
-        
+
 
 class tableau:
     config : Configuration
@@ -22,11 +22,3 @@ class tableau:
     def __init__(self, configuration, liste_proba):
         self.configuration = configuration
         self.liste_proba = liste_proba
-
-
-# case00 = case(True, 5)
-# case01 = case(False, 2)
-# case10 = case(True, 1)
-# case11 = case(False, 3)
-
-# tableau_proba = tableau([1, 0, 0], [2, 1, 0], [[case00, case01], [case10, case11]])
