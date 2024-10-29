@@ -48,7 +48,7 @@ class ImageDrawingService:
             fill = (0, 0, 0))
 
 
-    def drawTable(self, tablexpos,tableypos,valueList):
+    def drawTable(self, tablexpos:int,tableypos:int,valueList:list):
         hauteurCellule = 100
         largeurCellule = 100
         margeInterieure = 50
@@ -67,6 +67,7 @@ class ImageDrawingService:
                 self.draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
             x0 += largeurCellule
 
+        #Première colonne
         x0 = tablexpos
         y0 = tableypos + hauteurCellule
         for j in range(len(valueList[0]) - 1):
@@ -94,7 +95,7 @@ class ImageDrawingService:
             x0 = tablexpos + largeurCellule
 
         
-        #Dessine les lignes
+        #Dessine les lignes du tableau
         for i in range(len(valueList)+2):
             ypos = tableypos + i * hauteurCellule
             self.draw.line([(tablexpos, ypos), (tablexpos + largeurCellule * (len(valueList[0]) + 1), ypos)], fill=(0, 0, 0))
@@ -102,7 +103,7 @@ class ImageDrawingService:
             xpos = tablexpos + i * largeurCellule
             self.draw.line([(xpos, tableypos), (xpos, tableypos + hauteurCellule * (len(valueList) + 1))], fill=(0, 0, 0))
 
-        #Ecris
+        #Ecris les valeurs dans l'image
         for i in range(len(valueList[0])):
             xpos = tablexpos + largeurCellule + i * largeurCellule + 45
             ypos = tableypos + 30
