@@ -1,5 +1,11 @@
 import numpy as np
 
+import sys
+sys.path.append('../')
+
+from classes import Configuration
+
+config = Configuration([1, 0, 0],[0, 0, 0], True, 10, 6)
 computed_probabilities = {}
 
 class AttackResult:
@@ -26,7 +32,7 @@ def multiply_special(input:list[list[int]]):
     return np.array(np.meshgrid(*input)).T.reshape(-1, len(input))
 
 
-def compute_battle(attack: int, defense:int) -> float:
+def compute_battle(attack: int, defense:int, configuration : Configuration) -> float:
     """
     Returns the probability for the attack to win and the number of soldier left in attack (if attack wins) and in defense (if defense wins).
     """
@@ -47,11 +53,17 @@ def compute_battle(attack: int, defense:int) -> float:
     # For each case, compute the probability and then call recursively.
     def_pwr = min(defense, 2)
     att_pwr = min(attack, 3)
-    defense_liste = [[i for i in range(1, 7)] for _ in range(def_pwr)]
-    attaque_liste = [[i for i in range(1, 7)] for _ in range(att_pwr)]
-    (i for i in range(5))
+
+    att_cap = configuration.vaisseaux_att[0]
+    def_cap = configuration.vaisseaux_def[0]
+    
+
+    defense_liste = [[i for i in range(1, 9 if (configuration.base or def_cap > dice) else 7)] for dice in range(def_pwr)]
+    attaque_liste = [[i for i in range(1, 9 if (att_cap > dice) else 7)] for dice in range(att_pwr)]
+    
     def_dice = multiply_special(defense_liste)
     att_dice = multiply_special(attaque_liste)
+
 
     possibilities = len(def_dice) * len(att_dice)
     proba = 0
@@ -95,5 +107,5 @@ def compute_battle(attack: int, defense:int) -> float:
 
     return proba
 
-print(compute_battle(2, 1))
+print(compute_battle(5, 1))
 #print(computed_probabilities)
