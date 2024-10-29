@@ -26,6 +26,6 @@ class tableau:
     config : Configuration
     liste_proba : list[list[case]]
 
-    def __init__(self, configuration, liste_proba):
-        self.configuration = configuration
+    def __init__(self, config, liste_proba):
+        self.config = config
         self.liste_proba = liste_proba
