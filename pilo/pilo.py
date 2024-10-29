@@ -5,7 +5,7 @@ dirName= os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f'{dirName}/../')
 from classes import tableau, Configuration
 
-config = Configuration([2,3,3],[2,3,3],True,50,50)
+config = Configuration([2,3,3],[2,3,3],True)
 tab = tableau(config,[[0.2,5.0],[0.1,5.0]])
 im = Image.new("RGB", (1000*len(tab.liste_proba), 1000*len(tab.liste_proba)), "white")
 titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
@@ -17,10 +17,34 @@ def drawTable(tablexpos,tableypos,valueList):
     hauteurCellule = 100
     largeurCellule = 100
     margeInterieure = 10
+    x0 = tablexpos
+    y0 = tableypos
+
+    # Dessine les couleurs
+    # Première ligne
+    for i in range(len(valueList[0]) + 1):
+            if i==0:
+                couleur = (0,0,0)
+            else:
+                couleur = (255,255,255)
+            x1 = x0 + largeurCellule
+            y1 = y0 + hauteurCellule
+            draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+            x0 += largeurCellule
+
+    x0 = tablexpos
+    y0 = tableypos + hauteurCellule
+    for j in range(len(valueList[0]) - 1):
+            couleur = (255,255,255)
+            x1 = x0 + largeurCellule
+            y1 = y0 + hauteurCellule
+            draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+            y0 += hauteurCellule
+    
+    x0 = tablexpos + largeurCellule
+    y0 = tableypos + hauteurCellule
     for i,liste in enumerate(valueList):
         for j,case in enumerate(valueList[0]):
-            x0 = tablexpos + j * largeurCellule
-            y0 = tableypos + i * hauteurCellule
             x1 = x0 + largeurCellule
             y1 = y0 + hauteurCellule
             if 1:#case.proba > 0.5:
@@ -30,19 +54,34 @@ def drawTable(tablexpos,tableypos,valueList):
             else:
                 couleur = (255,165,0)
             draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+            x0 += largeurCellule
+        y0 += hauteurCellule
+        x0 = tablexpos + largeurCellule
+
+    
     #Dessine les lignes
-    for i in range(len(valueList)+1):
+    for i in range(len(valueList)+2):
         ypos = tableypos + i * hauteurCellule
-        draw.line([(tablexpos, ypos), (tablexpos + largeurCellule * len(valueList[0]), ypos)], fill=(0, 0, 0))
-    for i in range(len(valueList[0])+1):
+        draw.line([(tablexpos, ypos), (tablexpos + largeurCellule * (len(valueList[0]) + 1), ypos)], fill=(0, 0, 0))
+    for i in range(len(valueList[0])+2):
         xpos = tablexpos + i * largeurCellule
-        draw.line([(xpos, tableypos), (xpos, tableypos + hauteurCellule * len(valueList))], fill=(0, 0, 0))
+        draw.line([(xpos, tableypos), (xpos, tableypos + hauteurCellule * (len(valueList) + 1))], fill=(0, 0, 0))
 
     #Ecris
+    for i in range(len(valueList)):
+            xpos = tablexpos + largeurCellule + i * largeurCellule + margeInterieure
+            ypos = tableypos + margeInterieure
+            draw.text((xpos, ypos), str(i+1), fill=(0,0,0), font=generalFont)
+    
+    for j in range(len(valueList)):
+            xpos = tablexpos + margeInterieure
+            ypos = tableypos + hauteurCellule + j * hauteurCellule + margeInterieure
+            draw.text((xpos, ypos), str(j+1), fill=(0,0,0), font=generalFont)
+
     for i, line in enumerate(valueList):
         for j, column in enumerate(line):
-            xpos = tablexpos + j * largeurCellule + margeInterieure
-            ypos = tableypos + i * hauteurCellule + margeInterieure
+            xpos = tablexpos + largeurCellule + j * largeurCellule + margeInterieure
+            ypos = tableypos + hauteurCellule + i * hauteurCellule + margeInterieure
             draw.text((xpos, ypos), str(round(column, 3)), fill=(0,0,0), font=generalFont)
 
 draw.multiline_text((10, 10), f"Attaque  👿 |  Vaisseau: Capital: {tab.config.vaisseaux_at[0]} Bombardier: {tab.config.vaisseaux_at[1]} Chasseur: {tab.config.vaisseaux_at[2]}", font=titleFont, fill=(0, 0, 0))
