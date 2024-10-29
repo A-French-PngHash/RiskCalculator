@@ -7,11 +7,11 @@ from classes import Tableau, Configuration
 
 config = Configuration([2,3,3],[2,3,3],True)
 tab = Tableau(config,[[0.2,5.0],[0.1,5.0]])
-im = Image.new("RGB", (1000*len(tab.liste_proba), 1000*len(tab.liste_proba)), "white")
+im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_proba)), "white")
 
 titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
 size=30)
-generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=20)
+generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=40)
 bigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=40)
 
 draw = ImageDraw.Draw(im)
@@ -19,7 +19,7 @@ draw = ImageDraw.Draw(im)
 def drawTable(tablexpos,tableypos,valueList):
     hauteurCellule = 100
     largeurCellule = 100
-    margeInterieure = 10
+    margeInterieure = 20
     x0 = tablexpos
     y0 = tableypos
 
