@@ -3,7 +3,14 @@ class Configuration:
     vaisseaux_j2 : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 2
     base : bool # True si base impériale présente
     nb_troupes_j1 : int
-    nb_troupes_j1 : int
+    nb_troupes_j2 : int
+
+    def __init__(self, vaisseaux_j1, vaisseaux_j2, base, nb_troupes_j1, nb_troupes_j2):
+        self.vaisseaux_j1 = vaisseaux_j1
+        self.vaisseaux_j2 = vaisseaux_j2
+        self.base = base
+        self.nb_troupes_j1 = nb_troupes_j1
+        self.nb_troupes_j2 = nb_troupes_j2
 
 
 class case:
