@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw
 import sys
 from fonts import *
 sys.path.append(f'{dirName}/../')
-from classes import Tableau, Configuration
+from classes import Tableau, Configuration, Case
 
 
 def drawFirstTile(width, height, x0, y0):
@@ -58,9 +58,9 @@ def drawTable(tablexpos,tableypos,valueList):
         for j,case in enumerate(valueList[0]):
             x1 = x0 + largeurCellule
             y1 = y0 + hauteurCellule
-            if 1:#case.proba > 0.5:
+            if case.proba > 0.5:
                 couleur = (0,255,0)
-            elif 0:#case.proba <0.5:
+            elif case.proba <0.5:
                 couleur = (255,0,0)
             else:
                 couleur = (255,165,0)
@@ -93,7 +93,7 @@ def drawTable(tablexpos,tableypos,valueList):
         for j, column in enumerate(line):
             xpos = tablexpos + largeurCellule + j * largeurCellule + 10
             ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
-            draw.text((xpos, ypos), str(round(column*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
+            draw.text((xpos, ypos), str(round(column.proba*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
 
 def image(config : Configuration, tab: Tableau, finaldir : str, finalname: str):
     """
@@ -122,4 +122,9 @@ def image(config : Configuration, tab: Tableau, finaldir : str, finalname: str):
         draw.multiline_text((300, 150), "Base: Non", font=bigGeneralFont, fill=(0, 0, 0))
     drawTable(5,200,tab.liste_proba)
 
-    im.save(f"{finaldir}/finalname.png", "PNG")
+    im.save(f"{finaldir}/{finalname}.png", "PNG")
+'''
+tempConf = Configuration([2,3,3],[2,3,3],True)
+tempCase = Case(0.2,5)
+image(tempConf,Tableau(tempConf,[[tempCase,tempCase],[tempCase,tempCase],[tempCase,tempCase]]),dirName,"output")
+'''
