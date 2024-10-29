@@ -11,9 +11,9 @@ im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_pro
 
 titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
 size=30)
-generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=40)
-bigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=40)
-
+generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=17)
+bigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=23)
+bigBigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=33)
 draw = ImageDraw.Draw(im)
 
 def drawTable(tablexpos,tableypos,valueList):
@@ -87,9 +87,12 @@ def drawTable(tablexpos,tableypos,valueList):
             ypos = tableypos + hauteurCellule + i * hauteurCellule + margeInterieure
             draw.text((xpos, ypos), str(round(column, 3)), fill=(0,0,0), font=generalFont)
 
-draw.multiline_text((10, 10), f"Attaque\n Capital: {tab.config.vaisseaux_att[0]}\n Bombardier: {tab.config.vaisseaux_att[1]}\n Chasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
-draw.multiline_text((1000, 10), f"Défense\n  Capital: {tab.config.vaisseaux_def[0]}\n Bombardier: {tab.config.vaisseaux_def[1]}\n Chasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
+draw.multiline_text((5, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
+draw.multiline_text((5, 60), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-drawTable(100,100,tab.liste_proba)
+draw.multiline_text((300, 5), "Defense", font=bigBigGeneralFont, fill=(0, 0, 0))
+draw.multiline_text((300,60), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
+
+drawTable(100,300,tab.liste_proba)
 
 im.save(f"{dirName}/output.png", "PNG")
