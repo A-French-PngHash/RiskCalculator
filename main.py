@@ -29,7 +29,7 @@ if __name__=="__main__":
     risk_prob = RiskProbaCalculator(configuration)
     tab = risk_prob.compute_all(10, 10)
     image = ImageDrawingService()
-    image.draw_data(tab, "C:/Users/Hugo/Documents/Python/projets/Risk/RiskCalculator/example_pil", "test")
+    image.draw_data(tab, "./", "test")
 
 
     
