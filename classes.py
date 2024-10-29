@@ -1,6 +1,6 @@
 class Configuration:
-    vaisseaux_at : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 1
-    vaisseaux_de : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 2
+    vaisseaux_at : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour l'attaquant
+    vaisseaux_de : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le défenseur
     base : bool # True si base impériale présente
     nb_troupes_at : int
     nb_troupes_de : int
@@ -14,8 +14,8 @@ class Configuration:
 
 
 class case:
-    proba : float # probabilité que le joueur 1 gagne
-    nb_troupes_restantes : int # espérance des troupes restantes du joueur 1
+    proba : float # probabilité que l'attaquant gagne
+    nb_troupes_restantes : int # espérance des troupes restantes de l'attaquant
 
     def __init__(self, proba, nb_troupes_restantes):
         self.proba = proba
