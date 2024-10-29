@@ -6,46 +6,30 @@ sys.path.append(f'{dirName}/../')
 from classes import tableau, Configuration
 
 config = Configuration([2,3,3],[2,3,3],True,50,50)
-tab = tableau(config,[["qejkfdgs","dsfds"],["dsfds","sfsf"]])
+tab = tableau(config,[[0.2,5.0],[0.1,5.0]])
 im = Image.new("RGB", (1000*len(tab.liste_proba), 1000*len(tab.liste_proba)), "white")
 titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
 size=30)
 generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=20)
 draw = ImageDraw.Draw(im)
 
-draw.text((100, 100), f"Nombre de vaisseaux capitaux de l'attaquant : {str(config.vaisseaux_at[0])}", font=generalFont, fill=(0, 0, 0))
-draw.text((100, 150), f"Nombre de vaisseaux capitaux du défenseur : {str(config.vaisseaux_de[0])}", font=generalFont, fill=(0, 0, 0))
-draw.text((100, 200), f"Nombre de chasseurs de l'attaquant : {str(config.vaisseaux_at[2])}", font=generalFont, fill=(0, 0, 0))
-draw.text((100, 250), f"Nombre de chasseurs du défenseur : {str(config.vaisseaux_de[2])}", font=generalFont, fill=(0, 0, 0))
-draw.text((100, 300), f"Nombre de bombardiers de l'attaquant : {str(config.vaisseaux_at[1])}", font=generalFont, fill=(0, 0, 0))
-draw.text((100, 350), f"Nombre de bombardiers du défenseur : {str(config.vaisseaux_de[1])}", font=generalFont, fill=(0, 0, 0))
-draw.text((100, 400), f"Nombre de troupes de l'attaquant : {str(config.nb_troupes_at)}", font=generalFont, fill=(0, 0, 0))
-draw.text((100, 450), f"Nombre de troupes du défenseur : {str(config.nb_troupes_de)}", font=generalFont, fill=(0, 0, 0))
-draw.text((100, 500), f"Y a-t-il une base ? : {str(config.base)}", font=generalFont, fill=(0, 0, 0))
-
-
-def drawTable(valueList):
-    tablexpos = 100
-    tableypos = 550
+def drawTable(tablexpos,tableypos,valueList):
     hauteurCellule = 100
     largeurCellule = 100
     margeInterieure = 10
-
-    #Dessine les fonds
     for i,liste in enumerate(valueList):
         for j,case in enumerate(valueList[0]):
             x0 = tablexpos + j * largeurCellule
             y0 = tableypos + i * hauteurCellule
             x1 = x0 + largeurCellule
             y1 = y0 + hauteurCellule
-            if case.proba >0.5:
+            if 1:#case.proba > 0.5:
                 couleur = (0,255,0)
-            elif case.proba <0.5:
+            elif 0:#case.proba <0.5:
                 couleur = (255,0,0)
             else:
                 couleur = (255,165,0)
             draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
-
     #Dessine les lignes
     for i in range(len(valueList)+1):
         ypos = tableypos + i * hauteurCellule
@@ -59,8 +43,11 @@ def drawTable(valueList):
         for j, column in enumerate(line):
             xpos = tablexpos + j * largeurCellule + margeInterieure
             ypos = tableypos + i * hauteurCellule + margeInterieure
-            draw.text((xpos, ypos), str(column), fill=(0,0,0), font=generalFont)
+            draw.text((xpos, ypos), str(round(column, 3)), fill=(0,0,0), font=generalFont)
 
-drawTable(tab.liste_proba)
+draw.multiline_text((10, 10), f"Attaque  👿 |  Vaisseau: Capital: {tab.config.vaisseaux_at[0]} Bombardier: {tab.config.vaisseaux_at[1]} Chasseur: {tab.config.vaisseaux_at[2]}", font=titleFont, fill=(0, 0, 0))
+draw.multiline_text((1000, 10), f"Défense  🤩 |  Capital: {tab.config.vaisseaux_de[0]} Bombardier: {tab.config.vaisseaux_de[1]} Chasseur: {tab.config.vaisseaux_de[1]}", font=titleFont, fill=(0, 0, 0))
+
+drawTable(100,100,tab.liste_proba)
 
 im.save(f"{dirName}/output.png", "PNG")
