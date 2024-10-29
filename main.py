@@ -3,6 +3,9 @@
 from classes import Tableau, Configuration
 from proba_calc.proba_calc import RiskProbaCalculator
 from pilo.pilo import ImageDrawingService
+import os
+
+dirName= os.path.dirname(os.path.abspath(__file__))
 
 
 # Configuration
@@ -29,7 +32,7 @@ if __name__=="__main__":
     risk_prob = RiskProbaCalculator(configuration)
     tab = risk_prob.compute_all(10, 10)
     image = ImageDrawingService()
-    image.draw_data(tab, "./", "test")
+    image.draw_data(tab, f"{dirName}/output", "test")
 
 
     
