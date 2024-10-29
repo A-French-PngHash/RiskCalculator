@@ -1,3 +1,7 @@
+import numpy as np
+
+computed_probabilities = {}
+
 class AttackResult:
     attackWon: bool
     soldierLeft: int
@@ -6,15 +10,32 @@ class AttackResult:
         self.attackWon = attackWon
         self.soldierLeft = soldierLeft
 
-
-def compute_battle(attack: int, defense:int) -> (float):
+def multiply_special(input:list[list[int]]):
     """
-    Returns the probability for the attack to win.
+    Input : 
+    [
+        [4, 1],
+        [3, 4]
+        [7],
+    ]
+
+    output : 
+    [[4, 3, 7], [4, 4, 7], [1, 3, 7], [1, 4, 7]]
+    """
+
+    return np.array(np.meshgrid(*input)).T.reshape(-1, len(input))
+
+
+def compute_battle(attack: int, defense:int) -> float:
+    """
+    Returns the probability for the attack to win and the number of soldier left in attack (if attack wins) and in defense (if defense wins).
     """
     if (defense == 0):
         return 1
     if (attack == 0):
         return 0
+    if (attack, defense) in computed_probabilities:
+        return computed_probabilities[(attack, defense)]
     
     # 5 case : 
     # attack loses 2 soldier
@@ -24,7 +45,55 @@ def compute_battle(attack: int, defense:int) -> (float):
     # defense lose 1 soldier
 
     # For each case, compute the probability and then call recursively.
-    if (defense) == 1 or (attack) == 1:
-        def_pwr = min(defense, 2)
-        att_pwr = min(defense, 2)
+    def_pwr = min(defense, 2)
+    att_pwr = min(attack, 3)
+    defense_liste = [[i for i in range(1, 7)] for _ in range(def_pwr)]
+    attaque_liste = [[i for i in range(1, 7)] for _ in range(att_pwr)]
+    (i for i in range(5))
+    def_dice = multiply_special(defense_liste)
+    att_dice = multiply_special(attaque_liste)
 
+    possibilities = len(def_dice) * len(att_dice)
+    proba = 0
+    soldier_left_att = 0
+    soldier_left_def = 0
+    if def_pwr == 1 or att_pwr == 1:
+        def_lose_one = 0
+        att_lose_one = 0
+        for att in att_dice:
+            for deff in def_dice:
+                if max(att) > max(deff):
+                    def_lose_one += 1
+                else:
+                    att_lose_one += 1
+        proba = (def_lose_one * compute_battle(attack=attack, defense=defense - 1) + att_lose_one * compute_battle(attack=attack - 1, defense=defense))/possibilities
+       
+    else:
+        att_lose_two = 0
+        def_lose_two = 0
+        one_each = 0
+
+        for att in att_dice:
+            for deff in def_dice:
+                satt = sorted(att, reverse=True)
+                sdeff = sorted(deff, reverse=True)
+                a1, a2 = satt[0], satt[1]
+                d1, d2 = sdeff[0], sdeff[1]
+                if a1 > d1 and a2 > d2:
+                    def_lose_two +=1
+                elif a1 <= d1 and a2 <= d2:
+                    att_lose_two += 1
+                else:
+                    one_each += 1
+
+        proba = (att_lose_two * compute_battle(attack - 2, defense)
+                  + def_lose_two * compute_battle(attack, defense - 2)
+                  + one_each * compute_battle(attack - 1, defense - 1))/possibilities
+        
+        
+    computed_probabilities[(attack, defense)] = proba
+
+    return proba
+
+print(compute_battle(2, 1))
+#print(computed_probabilities)
