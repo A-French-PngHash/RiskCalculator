@@ -1,8 +1,7 @@
 from math import floor
-import os
-from PIL import ImageFont, Image, ImageDraw
+from PIL import Image, ImageDraw
 import sys
-dirName= os.path.dirname(os.path.abspath(__file__))
+from fonts import *
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration
 
@@ -10,11 +9,6 @@ config = Configuration([2,3,3],[2,3,3],True)
 tab = Tableau(config,[[0.2,5.0],[0.1,5.0]])
 im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_proba)), "white")
 
-titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
-size=30)
-generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=15)
-bigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=23)
-bigBigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=33)
 draw = ImageDraw.Draw(im)
 
 def drawFirstTile(width, height, x0, y0):
