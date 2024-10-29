@@ -1,6 +1,6 @@
 import os
 from PIL import ImageFont, Image, ImageDraw
-
+from classes import tableau
 
 
 
