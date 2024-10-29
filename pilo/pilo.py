@@ -3,14 +3,17 @@ from PIL import ImageFont, Image, ImageDraw
 import sys
 dirName= os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f'{dirName}/../')
-from classes import tableau, Configuration
+from classes import Tableau, Configuration
 
 config = Configuration([2,3,3],[2,3,3],True)
-tab = tableau(config,[[0.2,5.0],[0.1,5.0]])
+tab = Tableau(config,[[0.2,5.0],[0.1,5.0]])
 im = Image.new("RGB", (1000*len(tab.liste_proba), 1000*len(tab.liste_proba)), "white")
+
 titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
 size=30)
 generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=20)
+bigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=40)
+
 draw = ImageDraw.Draw(im)
 
 def drawTable(tablexpos,tableypos,valueList):
@@ -84,8 +87,8 @@ def drawTable(tablexpos,tableypos,valueList):
             ypos = tableypos + hauteurCellule + i * hauteurCellule + margeInterieure
             draw.text((xpos, ypos), str(round(column, 3)), fill=(0,0,0), font=generalFont)
 
-draw.multiline_text((10, 10), f"Attaque  👿 |  Vaisseau: Capital: {tab.config.vaisseaux_at[0]} Bombardier: {tab.config.vaisseaux_at[1]} Chasseur: {tab.config.vaisseaux_at[2]}", font=titleFont, fill=(0, 0, 0))
-draw.multiline_text((1000, 10), f"Défense  🤩 |  Capital: {tab.config.vaisseaux_de[0]} Bombardier: {tab.config.vaisseaux_de[1]} Chasseur: {tab.config.vaisseaux_de[1]}", font=titleFont, fill=(0, 0, 0))
+draw.multiline_text((10, 10), f"Attaque  👿 |  Vaisseau: Capital: {tab.config.vaisseaux_att[0]} Bombardier: {tab.config.vaisseaux_att[1]} Chasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
+draw.multiline_text((1000, 10), f"Défense  🤩 |  Capital: {tab.config.vaisseaux_def[0]} Bombardier: {tab.config.vaisseaux_def[1]} Chasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
 
 drawTable(100,100,tab.liste_proba)
 
