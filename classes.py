@@ -1,37 +1,39 @@
 class Configuration:
-    vaisseaux_at : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour l'attaquant
-    vaisseaux_de : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le défenseur
+    vaisseaux_att : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 1
+    vaisseaux_def : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 2
     base : bool # True si base impériale présente
 
-    def __init__(self, vaisseaux_at, vaisseaux_de, base):
-        self.vaisseaux_at = vaisseaux_at
-        self.vaisseaux_de = vaisseaux_de
+    def __init__(self, vaisseaux_att, vaisseaux_def, base):
+        self.vaisseaux_att = vaisseaux_att
+        self.vaisseaux_def = vaisseaux_def
         self.base = base
 
+    def __repr__(self) -> str:
+        return str(self.vaisseaux_att) + " " + str(self.vaisseaux_def) + " Base : " + ("oui" if self.base else "non")
 
-class case:
-    proba : float # probabilité que l'attaquant gagne
-    nb_troupes_restantes : float # espérance des troupes restantes de l'attaquant
+
+class Case:
+    proba : float # probabilité que le joueur 1 gagne
+    nb_troupes_restantes : int # espérance des troupes restantes du joueur 1
 
     def __init__(self, proba, nb_troupes_restantes):
         self.proba = proba
         self.nb_troupes_restantes = nb_troupes_restantes
 
+    def __str__(self) -> str:
+        return str(self.proba)
+    
+    def __repr__(self) -> str:
+        return str(self.proba)
 
-class tableau:
+
+class Tableau:
     config : Configuration
-    liste_proba : list[list[case]]
+    liste_proba : list[list[Case]]
 
     def __init__(self, config, liste_proba):
         self.config = config
         self.liste_proba = liste_proba
 
-
-# case00 = case(0.1, 2.3)
-# case01 = case(0.6, 5.6)
-# case10 = case(0.5, 1.1)
-# case11 = case(0.2, 0.5)
-
-# config = Configuration([0,1,0], [1,3,0], True)
-
-# tab = tableau(config, [[case00, case01], [case10, case11]])
+    def __repr__(self):
+        return "Configuration : " + str(self.config) + "\n" + "Probabilités : " + str(self.liste_proba)
