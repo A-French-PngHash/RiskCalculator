@@ -20,8 +20,10 @@ class ImageDrawingService:
             - finalname : How the image should be named. Note : the extension will be .png.
             WARNING : Will overide an image if it already exists under the same name.
         """
-        im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_proba)), "white")
+        im = Image.new("RGB", (max(500, 110+ 100*len(tab.liste_proba[0])), max(500, 310 + 100*len(tab.liste_proba))), "white")
         self.draw = ImageDraw.Draw(im)
+
+
         self.draw.multiline_text((5, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
         self.draw.multiline_text((5, 60), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
@@ -129,5 +131,6 @@ class ImageDrawingService:
 tempConf = Configuration([2,3,3],[2,3,3],True)
 tempCase = Case(0.7,5)
 service = ImageDrawingService()
-service.draw_data(Tableau(tempConf,[[tempCase,tempCase,tempCase,tempCase],[tempCase,tempCase,tempCase,tempCase],[tempCase,tempCase,tempCase,tempCase]]),dirName,"output")
+cases =  [tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase]
+service.draw_data(Tableau(tempConf,[cases, cases, cases]),dirName,"output")
 
