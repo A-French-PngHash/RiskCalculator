@@ -80,7 +80,7 @@ class ImageDrawingService:
         x0 = tablexpos + largeurCellule
         y0 = tableypos + hauteurCellule
         for i,liste in enumerate(valueList):
-            for j,case in enumerate(valueList[0]):
+            for j,case in enumerate(liste):
                 x1 = x0 + largeurCellule
                 y1 = y0 + hauteurCellule
                 if case.proba > 0.5:
