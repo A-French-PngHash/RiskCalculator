@@ -2,6 +2,7 @@ from PIL import ImageFont
 import os
 
 dirName= os.path.dirname(os.path.abspath(__file__))
+
 titleFont = ImageFont.truetype(
     f"{dirName}/Marianne/Marianne-ExtraBold.otf",
     size=30
