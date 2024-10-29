@@ -1,3 +1,4 @@
+from math import floor
 import os
 from PIL import ImageFont, Image, ImageDraw
 import sys
@@ -12,6 +13,22 @@ generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", siz
 bigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=23)
 bigBigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=33)
 
+def drawFirstTile(width, height, x0, y0):
+    draw.line((x0, y0, x0 + width, y0 + height), fill = (0, 0, 0), width=1)
+    print()
+    draw.text(
+         xy=(x0 + width * 0.1, y0 + height * 0.75), 
+         text="Attaque", 
+         font=generalFont, 
+         fill = (0, 0, 0))
+    
+    draw.text(
+         xy=(x0 + width * 0.3, y0 + height * 0.02), 
+         text="Defense", 
+         font=generalFont, 
+         fill = (0, 0, 0))
+
+
 def drawTable(tablexpos,tableypos,valueList):
     hauteurCellule = 100
     largeurCellule = 100
@@ -22,13 +39,15 @@ def drawTable(tablexpos,tableypos,valueList):
     # Dessine les couleurs
     # Première ligne
     for i in range(len(valueList[0]) + 1):
-            if i==0:
-                couleur = (0,0,0)
-            else:
-                couleur = (255,255,255)
+            
             x1 = x0 + largeurCellule
             y1 = y0 + hauteurCellule
-            draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+            if i == 0:
+                 drawFirstTile(largeurCellule, hauteurCellule, x0, y0)
+            else:
+                couleur =  (255,255,255)
+                draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+
             x0 += largeurCellule
 
     x0 = tablexpos
