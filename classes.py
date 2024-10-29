@@ -1,16 +1,16 @@
 class Configuration:
-    vaisseaux_j1 : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 1
-    vaisseaux_j2 : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 2
+    vaisseaux_at : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 1
+    vaisseaux_de : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 2
     base : bool # True si base impériale présente
-    nb_troupes_j1 : int
-    nb_troupes_j2 : int
+    nb_troupes_at : int
+    nb_troupes_de : int
 
-    def __init__(self, vaisseaux_j1, vaisseaux_j2, base, nb_troupes_j1, nb_troupes_j2):
-        self.vaisseaux_j1 = vaisseaux_j1
-        self.vaisseaux_j2 = vaisseaux_j2
+    def __init__(self, vaisseaux_at, vaisseaux_de, base, nb_troupes_at, nb_troupes_de):
+        self.vaisseaux_at = vaisseaux_at
+        self.vaisseaux_de = vaisseaux_de
         self.base = base
-        self.nb_troupes_j1 = nb_troupes_j1
-        self.nb_troupes_j2 = nb_troupes_j2
+        self.nb_troupes_at = nb_troupes_at
+        self.nb_troupes_de = nb_troupes_de
 
 
 class case:
