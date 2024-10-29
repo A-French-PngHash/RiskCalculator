@@ -33,12 +33,3 @@ if __name__=="__main__":
     tab = risk_prob.compute_all(10, 10)
     image = ImageDrawingService()
     image.draw_data(tab, f"{dirName}/output", "test")
-
-
-    
-
-
-# configuration = Configuration([1, 0, 3],[0, 0, 0], False)
-# risk_prob = RiskProbaCalculator(configuration)
-# print(risk_prob.compute_all(10, 10))
-
