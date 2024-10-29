@@ -118,7 +118,7 @@ class ImageDrawingService:
             for j, column in enumerate(line):
                 xpos = tablexpos + largeurCellule + j * largeurCellule + 10
                 ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
-                self.draw.text((xpos, ypos), str(round(column.proba*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
+                self.draw.text((xpos, ypos), str(round(column.proba, 3)*100)+"%", fill=(0,0,0), font=bigGeneralFont)
 
 
 tempConf = Configuration([2,3,3],[2,3,3],True)
