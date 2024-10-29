@@ -28,11 +28,9 @@ class tableau:
         self.liste_proba = liste_proba
 
 
-case00 = case(True, 5)
-case01 = case(False, 2)
-case10 = case(True, 1)
-case11 = case(False, 3)
+# case00 = case(True, 5)
+# case01 = case(False, 2)
+# case10 = case(True, 1)
+# case11 = case(False, 3)
 
-tableau_proba = tableau(1, 0, 0, 2, 1, 0, [[case00, case01], [case10, case11]])
-
-print(tableau_proba)
+# tableau_proba = tableau(1, 0, 0, 2, 1, 0, [[case00, case01], [case10, case11]])
