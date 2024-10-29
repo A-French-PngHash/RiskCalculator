@@ -109,7 +109,7 @@ class ImageDrawingService:
             self.draw.line([(xpos, tableypos), (xpos, tableypos + hauteurCellule * (len(valueList) + 1))], fill=(0, 0, 0))
 
         #Ecris
-        for i in range(len(valueList)):
+        for i in range(len(valueList[0])):
                 xpos = tablexpos + largeurCellule + i * largeurCellule + 45
                 ypos = tableypos + 30
                 self.draw.text((xpos, ypos), str(i+1), fill=(0,0,0), font=bigGeneralFont)
@@ -127,7 +127,7 @@ class ImageDrawingService:
 
 
 tempConf = Configuration([2,3,3],[2,3,3],True)
-tempCase = Case(0.2,5)
+tempCase = Case(0.7,5)
 service = ImageDrawingService()
 service.draw_data(Tableau(tempConf,[[tempCase,tempCase,tempCase,tempCase],[tempCase,tempCase,tempCase,tempCase],[tempCase,tempCase,tempCase,tempCase]]),dirName,"output")
 
