@@ -8,7 +8,6 @@ from classes import Tableau, Configuration, Case
 class ImageDrawingService:
     draw : ImageDraw
 
-
     def draw_data(self, tab: Tableau, finaldir : str, finalname: str):
         """
         Draws and saves an image displaying the data contained in `tab`.
@@ -61,26 +60,24 @@ class ImageDrawingService:
 
         # Dessine les couleurs
         # Première ligne
-        for i in range(len(valueList[0]) + 1):
-                
-                x1 = x0 + largeurCellule
-                y1 = y0 + hauteurCellule
-                if i == 0:
-                    self._drawFirstTile(largeurCellule, hauteurCellule, x0, y0)
-                else:
-                    couleur =  (255,255,255)
-                    self.draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
-
-                x0 += largeurCellule
+        for i in range(len(valueList[0]) + 1):    
+            x1 = x0 + largeurCellule
+            y1 = y0 + hauteurCellule
+            if i == 0:
+                self._drawFirstTile(largeurCellule, hauteurCellule, x0, y0)
+            else:
+                couleur =  (255,255,255)
+                self.draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+            x0 += largeurCellule
 
         x0 = tablexpos
         y0 = tableypos + hauteurCellule
         for j in range(len(valueList[0]) - 1):
-                couleur = (255,255,255)
-                x1 = x0 + largeurCellule
-                y1 = y0 + hauteurCellule
-                self.draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
-                y0 += hauteurCellule
+            couleur = (255,255,255)
+            x1 = x0 + largeurCellule
+            y1 = y0 + hauteurCellule
+            self.draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+            y0 += hauteurCellule
         
         x0 = tablexpos + largeurCellule
         y0 = tableypos + hauteurCellule
@@ -110,14 +107,14 @@ class ImageDrawingService:
 
         #Ecris
         for i in range(len(valueList[0])):
-                xpos = tablexpos + largeurCellule + i * largeurCellule + 45
-                ypos = tableypos + 30
-                self.draw.text((xpos, ypos), str(i+1), fill=(0,0,0), font=bigGeneralFont)
+            xpos = tablexpos + largeurCellule + i * largeurCellule + 45
+            ypos = tableypos + 30
+            self.draw.text((xpos, ypos), str(i+1), fill=(0,0,0), font=bigGeneralFont)
         
         for j in range(len(valueList)):
-                xpos = tablexpos + 45
-                ypos = tableypos + hauteurCellule + j * hauteurCellule + 30
-                self.draw.text((xpos, ypos), str(j+1), fill=(0,0,0), font=bigGeneralFont)
+            xpos = tablexpos + 45
+            ypos = tableypos + hauteurCellule + j * hauteurCellule + 30
+            self.draw.text((xpos, ypos), str(j+1), fill=(0,0,0), font=bigGeneralFont)
 
         for i, line in enumerate(valueList):
             for j, column in enumerate(line):
@@ -130,4 +127,3 @@ tempConf = Configuration([2,3,3],[2,3,3],True)
 tempCase = Case(0.7,5)
 service = ImageDrawingService()
 service.draw_data(Tableau(tempConf,[[tempCase,tempCase,tempCase,tempCase],[tempCase,tempCase,tempCase,tempCase],[tempCase,tempCase,tempCase,tempCase]]),dirName,"output")
-
