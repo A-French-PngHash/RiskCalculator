@@ -4,7 +4,7 @@ from PIL import ImageFont, Image, ImageDraw
 import sys
 dirName= os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f'{dirName}/../')
-from classes import Tableau, Configuration
+from classes import Tableau, Configuration, Case
 
 
 titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
@@ -65,9 +65,9 @@ def drawTable(tablexpos,tableypos,valueList):
         for j,case in enumerate(valueList[0]):
             x1 = x0 + largeurCellule
             y1 = y0 + hauteurCellule
-            if 1:#case.proba > 0.5:
+            if case.proba > 0.5:
                 couleur = (0,255,0)
-            elif 0:#case.proba <0.5:
+            elif case.proba <0.5:
                 couleur = (255,0,0)
             else:
                 couleur = (255,165,0)
@@ -100,10 +100,11 @@ def drawTable(tablexpos,tableypos,valueList):
         for j, column in enumerate(line):
             xpos = tablexpos + largeurCellule + j * largeurCellule + 10
             ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
-            draw.text((xpos, ypos), str(round(column*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
+            draw.text((xpos, ypos), str(round(column.proba*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
 
-def image(config, tab, finaldir, finalname):
+def image(config, tab, finaldir: str, finalname:str):
     im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_proba)), "white")
+    global draw
     draw = ImageDraw.Draw(im)
 
     draw.multiline_text((5, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
@@ -118,4 +119,9 @@ def image(config, tab, finaldir, finalname):
         draw.multiline_text((300, 150), "Base: Non", font=bigGeneralFont, fill=(0, 0, 0))
     drawTable(5,200,tab.liste_proba)
 
-    im.save(f"{finaldir}/finalname.png", "PNG")
+    im.save(f"{finaldir}/{finalname}.png", "PNG")
+'''
+tempConf = Configuration([2,3,3],[2,3,3],True)
+tempCase = Case(0.2,5)
+image(tempConf,Tableau(tempConf,[[tempCase,tempCase],[tempCase,tempCase],[tempCase,tempCase]]),dirName,"output")
+'''
