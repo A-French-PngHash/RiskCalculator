@@ -33,15 +33,12 @@ if __name__=="__main__":
     risk_prob = RiskProbaCalculator(configuration)
     tab = risk_prob.compute_all(5, 5)
     image = ImageDrawingService()
-<<<<<<< HEAD
-    image.draw_data(tab, f"{dirName}/output", "test")
-=======
-    dir = f"{dirName}/output"
 
-    os.mkdir(dir)
+    dir = f"{dirName}/output"
+    if not os.path.exists(dir):
+        os.mkdir(dir)
     numbers = [int(i[:-4]) for i in os.listdir(dir) if i[:-4].isnumeric()]
     image.draw_data(tab, dir, str((max(numbers) if numbers != [] else 0) + 1))
 
 
     
->>>>>>> refs/remotes/origin/main
