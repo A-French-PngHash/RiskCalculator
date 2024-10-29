@@ -36,7 +36,7 @@ def drawFirstTile(width, height, x0, y0):
 def drawTable(tablexpos,tableypos,valueList):
     hauteurCellule = 100
     largeurCellule = 100
-    margeInterieure = 20
+    margeInterieure = 50
     x0 = tablexpos
     y0 = tableypos
 
@@ -91,27 +91,31 @@ def drawTable(tablexpos,tableypos,valueList):
 
     #Ecris
     for i in range(len(valueList)):
-            xpos = tablexpos + largeurCellule + i * largeurCellule + margeInterieure
-            ypos = tableypos + margeInterieure
-            draw.text((xpos, ypos), str(i+1), fill=(0,0,0), font=generalFont)
+            xpos = tablexpos + largeurCellule + i * largeurCellule + 45
+            ypos = tableypos + 30
+            draw.text((xpos, ypos), str(i+1), fill=(0,0,0), font=bigGeneralFont)
     
     for j in range(len(valueList)):
-            xpos = tablexpos + margeInterieure
-            ypos = tableypos + hauteurCellule + j * hauteurCellule + margeInterieure
-            draw.text((xpos, ypos), str(j+1), fill=(0,0,0), font=generalFont)
+            xpos = tablexpos + 45
+            ypos = tableypos + hauteurCellule + j * hauteurCellule + 30
+            draw.text((xpos, ypos), str(j+1), fill=(0,0,0), font=bigGeneralFont)
 
     for i, line in enumerate(valueList):
         for j, column in enumerate(line):
-            xpos = tablexpos + largeurCellule + j * largeurCellule + margeInterieure
-            ypos = tableypos + hauteurCellule + i * hauteurCellule + margeInterieure
-            draw.text((xpos, ypos), str(round(column, 3)), fill=(0,0,0), font=generalFont)
+            xpos = tablexpos + largeurCellule + j * largeurCellule + 10
+            ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
+            draw.text((xpos, ypos), str(round(column*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
 
 draw.multiline_text((5, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
 draw.multiline_text((5, 60), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-draw.multiline_text((300, 5), "Defense", font=bigBigGeneralFont, fill=(0, 0, 0))
+draw.multiline_text((300, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
 draw.multiline_text((300,60), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-drawTable(100,300,tab.liste_proba)
+if tab.config.base:
+    draw.multiline_text((300, 150), "Base: Oui", font=bigGeneralFont, fill=(0, 0, 0))
+else:
+    draw.multiline_text((300, 150), "Base: Non", font=bigGeneralFont, fill=(0, 0, 0))
+drawTable(5,200,tab.liste_proba)
 
 im.save(f"{dirName}/output.png", "PNG")
