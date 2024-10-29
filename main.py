@@ -2,7 +2,7 @@
 
 from classes import Tableau, Configuration
 from proba_calc.proba_calc import RiskProbaCalculator
-
+from pilo.pilo import ImageDrawingService
 
 
 # Configuration
@@ -29,6 +29,8 @@ if __name__=="__main__":
     risk_prob = RiskProbaCalculator(configuration)
     list_prob = risk_prob.compute_all(10, 10)
     tab = Tableau(configuration,list_prob)
+    image = ImageDrawingService()
+    image.draw_data(tab, "tqet", "test")
 
 
     

@@ -1,7 +1,7 @@
 from math import floor
 from PIL import Image, ImageDraw
 import sys
-from fonts import *
+from pilo.fonts import *
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration, Case
 
