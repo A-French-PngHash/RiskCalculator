@@ -27,11 +27,11 @@ class tableau:
         self.liste_proba = liste_proba
 
 
-case00 = case(0.1, 2.3)
-case01 = case(0.6, 5.6)
-case10 = case(0.5, 1.1)
-case11 = case(0.2, 0.5)
+# case00 = case(0.1, 2.3)
+# case01 = case(0.6, 5.6)
+# case10 = case(0.5, 1.1)
+# case11 = case(0.2, 0.5)
 
-config = Configuration([0,1,0], [1,3,0], True)
+# config = Configuration([0,1,0], [1,3,0], True)
 
-tab = tableau(config, [[case00, case01], [case10, case11]])
+# tab = tableau(config, [[case00, case01], [case10, case11]])
