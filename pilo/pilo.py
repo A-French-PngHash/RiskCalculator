@@ -1,7 +1,7 @@
 from math import floor
 from PIL import Image, ImageDraw
 import sys
-from fonts import *
+from pilo.fonts import *
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration, Case
 
@@ -128,8 +128,8 @@ class ImageDrawingService:
 
     def image(tab: Tableau, finaldir : str, finalname: str):
         
-'''
-tempConf = Configuration([2,3,3],[2,3,3],True)
-tempCase = Case(0.2,5)
-image(tempConf,Tableau(tempConf,[[tempCase,tempCase],[tempCase,tempCase],[tempCase,tempCase]]),dirName,"output")
-'''
+        '''
+        tempConf = Configuration([2,3,3],[2,3,3],True)
+        tempCase = Case(0.2,5)
+        image(tempConf,Tableau(tempConf,[[tempCase,tempCase],[tempCase,tempCase],[tempCase,tempCase]]),dirName,"output")
+        '''
