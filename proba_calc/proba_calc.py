@@ -26,6 +26,6 @@ def compute_battle(attack: int, defense:int) -> (float):
     # For each case, compute the probability and then call recursively.
     if (defense) == 1 or (attack) == 1:
         def_pwr = min(defense, 2)
-        att_pwr = min(attack, power)
-        total_case
+        att_pwr = min(attack, 3)
+        def_number = []
 
