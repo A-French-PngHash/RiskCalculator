@@ -1,17 +1,10 @@
 from math import floor
-import os
-from PIL import ImageFont, Image, ImageDraw
+from PIL import Image, ImageDraw
 import sys
-dirName= os.path.dirname(os.path.abspath(__file__))
+from fonts import *
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration, Case
 
-
-titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
-size=30)
-generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=15)
-bigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=23)
-bigBigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=33)
 
 def drawFirstTile(width, height, x0, y0):
     draw.line((x0, y0, x0 + width, y0 + height), fill = (0, 0, 0), width=1)
@@ -102,7 +95,17 @@ def drawTable(tablexpos,tableypos,valueList):
             ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
             draw.text((xpos, ypos), str(round(column.proba*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
 
-def image(config, tab, finaldir: str, finalname:str):
+def image(config : Configuration, tab: Tableau, finaldir : str, finalname: str):
+    """
+    Draws and saves an image displaying the data contained in `tab`.
+
+    Parameters:
+        - config : Initial configuration (number of ships...)
+        - tab : Instance of Tableau containing the data to display.
+        - finaldir : Directory where the image should be saved.
+        - finalname : How the image should be named. Note : the extension will be .png.
+        WARNING : Will overide an image if it already exists under the same name.
+    """
     im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_proba)), "white")
     global draw
     draw = ImageDraw.Draw(im)
