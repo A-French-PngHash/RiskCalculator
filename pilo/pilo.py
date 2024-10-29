@@ -5,16 +5,12 @@ dirName= os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration
 
-config = Configuration([2,3,3],[2,3,3],True)
-tab = Tableau(config,[[0.2,5.0],[0.1,5.0]])
-im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_proba)), "white")
 
 titleFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-ExtraBold.otf",
 size=30)
 generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=15)
 bigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=23)
 bigBigGeneralFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", size=33)
-draw = ImageDraw.Draw(im)
 
 def drawTable(tablexpos,tableypos,valueList):
     hauteurCellule = 100
@@ -87,16 +83,20 @@ def drawTable(tablexpos,tableypos,valueList):
             ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
             draw.text((xpos, ypos), str(round(column*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
 
-draw.multiline_text((5, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
-draw.multiline_text((5, 60), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
+def image(config, tab, finaldir, finalname):
+    im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_proba)), "white")
+    draw = ImageDraw.Draw(im)
 
-draw.multiline_text((300, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
-draw.multiline_text((300,60), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
+    draw.multiline_text((5, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
+    draw.multiline_text((5, 60), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-if tab.config.base:
-    draw.multiline_text((300, 150), "Base: Oui", font=bigGeneralFont, fill=(0, 0, 0))
-else:
-    draw.multiline_text((300, 150), "Base: Non", font=bigGeneralFont, fill=(0, 0, 0))
-drawTable(5,200,tab.liste_proba)
+    draw.multiline_text((300, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
+    draw.multiline_text((300,60), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-im.save(f"{dirName}/output.png", "PNG")
+    if tab.config.base:
+        draw.multiline_text((300, 150), "Base: Oui", font=bigGeneralFont, fill=(0, 0, 0))
+    else:
+        draw.multiline_text((300, 150), "Base: Non", font=bigGeneralFont, fill=(0, 0, 0))
+    drawTable(5,200,tab.liste_proba)
+
+    im.save(f"{finaldir}/finalname.png", "PNG")
