@@ -24,15 +24,10 @@ class ImageDrawingService:
             
 
         self.draw.multiline_text((im.width / 2 - 160, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 - 160, 60), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0), align = "center")
+        self.draw.multiline_text((im.width / 2 - 160, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
         self.draw.multiline_text((im.width / 2 + 160, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 + 160,60), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0), align = "center")
-
-        if tab.config.base:
-            self.draw.multiline_text((im.width / 2 + 160, 150), "Base: Oui", font=bigGeneralFont, fill=(0, 0, 0))
-        else:
-            self.draw.multiline_text((im.width / 2 + 160, 150), "Base: Non", font=bigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + 160,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}\nBase: {'Oui' if tab.config.base else 'Non'}", font=bigGeneralFont, fill=(0, 0, 0))
         self.drawTable(5,200,tab.liste_proba)
 
         im.save(f"{finaldir}/{finalname}.png", "PNG")
