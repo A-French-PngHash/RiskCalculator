@@ -18,12 +18,12 @@ generalFont = ImageFont.truetype(f"{dirName}/Marianne/Marianne-Regular.otf", siz
 draw = ImageDraw.Draw(im)
 tab = tableau(1, 0, 0, 2, 1, 0)
 
-draw.text((100, 100), f"Nombre de vaisseaux capitaux du joueur 1 : {tab.nb_vaisseaux_capitaux_j1}", font=generalFont, fill=(0, 0, 0))
-draw.text((200, 100), f"Nombre de vaisseaux capitaux du joueur 2 : {tab.nb_vaisseaux_capitaux_j2}", font=generalFont, fill=(0, 0, 0))
-draw.text((300, 100), f"Nombre de chasseurs du joueur 1 : {tab.nb_chasseurs_j1}", font=generalFont, fill=(0, 0, 0))
-draw.text((400, 100), f"Nombre de chasseurs du joueur 2 : {tab.nb_chasseurs_j1}", font=generalFont, fill=(0, 0, 0))
-draw.text((500, 100), f"Nombre de bombardiers du joueur 1 : {tab.nb_bombardiers_j1}", font=generalFont, fill=(0, 0, 0))
-draw.text((600, 100), f"Nombre de bombardiers du joueur 2 : {tab.nb_bombardiers_j2}", font=generalFont, fill=(0, 0, 0))
+draw.text((100, 100), f"Nombre de vaisseaux capitaux du joueur 1 : {tab.vaisseaux_j1[0]}", font=generalFont, fill=(0, 0, 0))
+draw.text((200, 100), f"Nombre de vaisseaux capitaux du joueur 2 : {tab.vaisseaux_j2[0]}", font=generalFont, fill=(0, 0, 0))
+draw.text((300, 100), f"Nombre de chasseurs du joueur 1 : {tab.vaisseaux_j1[2]}", font=generalFont, fill=(0, 0, 0))
+draw.text((400, 100), f"Nombre de chasseurs du joueur 2 : {tab.vaisseaux_j2[2]}", font=generalFont, fill=(0, 0, 0))
+draw.text((500, 100), f"Nombre de bombardiers du joueur 1 : {tab.vaisseaux_j1[1]}", font=generalFont, fill=(0, 0, 0))
+draw.text((600, 100), f"Nombre de bombardiers du joueur 2 : {tab.vaisseaux_j2[1]}", font=generalFont, fill=(0, 0, 0))
 
 
 def drawTable(valueList):
