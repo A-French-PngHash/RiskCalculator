@@ -6,8 +6,6 @@ sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration
 
 
-draw = ImageDraw.Draw(im)
-
 def drawFirstTile(width, height, x0, y0):
     draw.line((x0, y0, x0 + width, y0 + height), fill = (0, 0, 0), width=1)
     print()
@@ -97,8 +95,19 @@ def drawTable(tablexpos,tableypos,valueList):
             ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
             draw.text((xpos, ypos), str(round(column*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
 
-def image(config, tab, finaldir, finalname):
+def image(config : Configuration, tab: Tableau, finaldir : str, finalname: str):
+    """
+    Draws and saves an image displaying the data contained in `tab`.
+
+    Parameters:
+        - config : Initial configuration (number of ships...)
+        - tab : Instance of Tableau containing the data to display.
+        - finaldir : Directory where the image should be saved.
+        - finalname : How the image should be named. Note : the extension will be .png.
+        WARNING : Will overide an image if it already exists under the same name.
+    """
     im = Image.new("RGB", (500 + 100*len(tab.liste_proba), 500+100*len(tab.liste_proba)), "white")
+    global draw
     draw = ImageDraw.Draw(im)
 
     draw.multiline_text((5, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
