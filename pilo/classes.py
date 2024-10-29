@@ -8,23 +8,19 @@ class Configuration:
 
 class case:
     gagne : bool # True si le joueur 1 gagne
-    nb_troupes_restantes : int
+    nb_troupes_restantes : int # espérance des troupes restantes du joueur 1
 
     def __init__(self, gagne, nb_troupes_restantes):
         self.gagne = gagne
         self.nb_troupes_restantes = nb_troupes_restantes
         
 
-
-
 class tableau:
-    vaisseaux_j1 : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 1
-    vaisseaux_j2 : list[int, int, int] # [nb_vaisseaux_capitaux, nb_bombardiers, nb_chasseurs] pour le joueur 2
+    config : Configuration
     liste_proba : list[list[case]]
 
-    def __init__(self, vaisseaux_j1, vaisseaux_j2, liste_proba):
-        self.vaisseaux_j1 = vaisseaux_j1
-        self.vaisseaux_j2 = vaisseaux_j2
+    def __init__(self, configuration, liste_proba):
+        self.configuration = configuration
         self.liste_proba = liste_proba
 
 
