@@ -34,7 +34,7 @@ class ImageDrawingService:
 
     def _drawFirstTile(self, width, height, x0, y0):
         self.draw.line((x0, y0, x0 + width, y0 + height), fill = (0, 0, 0), width=1)
-        print()
+        
         self.draw.text(
             xy=(x0 + width * 0.1, y0 + height * 0.75), 
             text="Attaque", 
