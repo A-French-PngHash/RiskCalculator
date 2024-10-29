@@ -33,9 +33,6 @@ if __name__=="__main__":
     risk_prob = RiskProbaCalculator(configuration)
     tab = risk_prob.compute_all(5, 5)
     image = ImageDrawingService()
-<<<<<<< HEAD
-    image.draw_data(tab, f"{dirName}/output", "test")
-=======
     dir = f"{dirName}/output"
 
     os.mkdir(dir)
@@ -44,4 +41,3 @@ if __name__=="__main__":
 
 
     
->>>>>>> refs/remotes/origin/main
