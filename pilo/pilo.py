@@ -31,9 +31,9 @@ def drawTable(valueList):
     margeInterieure = 10
 
     #Dessine les lignes
-    for i in range(len(valueList) + 1):
+    for i in range(len(valueList)+1):
         ypos = tableypos + i * hauteurCellule
-        draw.line([(tablexpos, ypos), (tablexpos + largeurCellule * 3, ypos)], fill=(0, 0, 0))
+        draw.line([(tablexpos, ypos), (tablexpos + largeurCellule * len(valueList[0]), ypos)], fill=(0, 0, 0))
     for i in range(len(valueList[0])+1):
         xpos = tablexpos + i * largeurCellule
         draw.line([(xpos, tableypos), (xpos, tableypos + hauteurCellule * len(valueList))], fill=(0, 0, 0))
