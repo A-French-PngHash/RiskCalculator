@@ -28,11 +28,14 @@ def config():
 
 
 if __name__=="__main__":
-    configuration = config()
+    #configuration = config()
+    configuration = Configuration([0, 0, 0], [0, 0, 0], False)
     risk_prob = RiskProbaCalculator(configuration)
-    tab = risk_prob.compute_all(10, 10)
+    tab = risk_prob.compute_all(5, 5)
     image = ImageDrawingService()
-    image.draw_data(tab, f"{dirName}/output", "test")
+    dir = f"{dirName}/output"
+    numbers = [int(i[:-4]) for i in os.listdir(dir) if i[:-4].isnumeric()]
+    image.draw_data(tab, dir, str((max(numbers) if numbers != [] else 0) + 1))
 
 
     
