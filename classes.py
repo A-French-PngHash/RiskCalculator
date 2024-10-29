@@ -14,7 +14,7 @@ class Configuration:
 
 class Case:
     proba : float # probabilité que le joueur 1 gagne
-    nb_troupes_restantes : int # espérance des troupes restantes du joueur 1
+    nb_troupes_restantes : float # espérance des troupes restantes du joueur 1
 
     def __init__(self, proba, nb_troupes_restantes):
         self.proba = proba
