@@ -87,8 +87,8 @@ def drawTable(tablexpos,tableypos,valueList):
             ypos = tableypos + hauteurCellule + i * hauteurCellule + margeInterieure
             draw.text((xpos, ypos), str(round(column, 3)), fill=(0,0,0), font=generalFont)
 
-draw.multiline_text((10, 10), f"Attaque  👿 |  Vaisseau: Capital: {tab.config.vaisseaux_att[0]} Bombardier: {tab.config.vaisseaux_att[1]} Chasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
-draw.multiline_text((1000, 10), f"Défense  🤩 |  Capital: {tab.config.vaisseaux_def[0]} Bombardier: {tab.config.vaisseaux_def[1]} Chasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
+draw.multiline_text((10, 10), f"Attaque\n Capital: {tab.config.vaisseaux_att[0]}\n Bombardier: {tab.config.vaisseaux_att[1]}\n Chasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
+draw.multiline_text((1000, 10), f"Défense\n  Capital: {tab.config.vaisseaux_def[0]}\n Bombardier: {tab.config.vaisseaux_def[1]}\n Chasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
 
 drawTable(100,100,tab.liste_proba)
 
