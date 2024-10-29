@@ -19,20 +19,15 @@ class ImageDrawingService:
             - finalname : How the image should be named. Note : the extension will be .png.
             WARNING : Will overide an image if it already exists under the same name.
         """
-        im = Image.new("RGB", (max(500, 110+ 100*len(tab.liste_proba[0])), max(500, 310 + 100*len(tab.liste_proba))), "white")
+        im = Image.new("RGB", (max(500, 110+ 100*len(tab.liste_proba[0])), max(500, 305 + 100*len(tab.liste_proba))), "white")
         self.draw = ImageDraw.Draw(im)
+            
 
+        self.draw.multiline_text((im.width / 2 - 160, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 - 160, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-        self.draw.multiline_text((5, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((5, 60), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
-
-        self.draw.multiline_text((300, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((300,60), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}", font=bigGeneralFont, fill=(0, 0, 0))
-
-        if tab.config.base:
-            self.draw.multiline_text((300, 150), "Base: Oui", font=bigGeneralFont, fill=(0, 0, 0))
-        else:
-            self.draw.multiline_text((300, 150), "Base: Non", font=bigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + 160, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + 160,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}\nBase: {'Oui' if tab.config.base else 'Non'}", font=bigGeneralFont, fill=(0, 0, 0))
         self.drawTable(5,200,tab.liste_proba)
 
         im.save(f"{finaldir}/{finalname}.png", "PNG")
@@ -53,7 +48,7 @@ class ImageDrawingService:
             fill = (0, 0, 0))
 
 
-    def drawTable(self, tablexpos,tableypos,valueList):
+    def drawTable(self, tablexpos:int,tableypos:int,valueList:list):
         hauteurCellule = 100
         largeurCellule = 100
         margeInterieure = 50
@@ -72,6 +67,7 @@ class ImageDrawingService:
                 self.draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
             x0 += largeurCellule
 
+        #Première colonne
         x0 = tablexpos
         y0 = tableypos + hauteurCellule
         for j in range(len(valueList[0]) - 1):
@@ -99,7 +95,7 @@ class ImageDrawingService:
             x0 = tablexpos + largeurCellule
 
         
-        #Dessine les lignes
+        #Dessine les lignes du tableau
         for i in range(len(valueList)+2):
             ypos = tableypos + i * hauteurCellule
             self.draw.line([(tablexpos, ypos), (tablexpos + largeurCellule * (len(valueList[0]) + 1), ypos)], fill=(0, 0, 0))
@@ -107,7 +103,7 @@ class ImageDrawingService:
             xpos = tablexpos + i * largeurCellule
             self.draw.line([(xpos, tableypos), (xpos, tableypos + hauteurCellule * (len(valueList) + 1))], fill=(0, 0, 0))
 
-        #Ecris
+        #Ecris les valeurs dans l'image
         for i in range(len(valueList[0])):
             xpos = tablexpos + largeurCellule + i * largeurCellule + 45
             ypos = tableypos + 30
