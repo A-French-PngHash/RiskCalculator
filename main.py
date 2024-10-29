@@ -27,10 +27,9 @@ def config():
 if __name__=="__main__":
     configuration = config()
     risk_prob = RiskProbaCalculator(configuration)
-    list_prob = risk_prob.compute_all(10, 10)
-    tab = Tableau(configuration,list_prob)
+    tab = risk_prob.compute_all(10, 10)
     image = ImageDrawingService()
-    image.draw_data(tab, "tqet", "test")
+    image.draw_data(tab, "C:/Users/Hugo/Documents/Python/projets/Risk/RiskCalculator/example_pil", "test")
 
 
     
