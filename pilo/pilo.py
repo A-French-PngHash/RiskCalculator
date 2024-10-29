@@ -23,11 +23,11 @@ class ImageDrawingService:
         self.draw = ImageDraw.Draw(im)
             
 
-        self.draw.multiline_text((im.width / 2 - 160, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 - 160, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 - 140, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 - 140, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-        self.draw.multiline_text((im.width / 2 + 160, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 + 160,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}\nBase: {'Oui' if tab.config.base else 'Non'}", font=bigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + 140, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + 140,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}\nBase: {'Oui' if tab.config.base else 'Non'}", font=bigGeneralFont, fill=(0, 0, 0))
         self.drawTable(5,200,tab.liste_proba)
 
         im.save(f"{finaldir}/{finalname}.png", "PNG")
@@ -118,7 +118,7 @@ class ImageDrawingService:
             for j, column in enumerate(line):
                 xpos = tablexpos + largeurCellule + j * largeurCellule + 10
                 ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
-                self.draw.text((xpos, ypos), str(round(column.proba*100, 3))+"%", fill=(0,0,0), font=bigGeneralFont)
+                self.draw.text((xpos, ypos), str(round(column.proba, 3)*100)+"%", fill=(0,0,0), font=bigGeneralFont)
 
 
 tempConf = Configuration([2,3,3],[2,3,3],True)
