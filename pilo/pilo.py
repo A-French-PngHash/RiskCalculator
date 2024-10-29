@@ -32,25 +32,24 @@ def drawTable(tablexpos,tableypos,valueList):
     # Dessine les couleurs
     # Première ligne
     for i in range(len(valueList[0]) + 1):
-            
-            x1 = x0 + largeurCellule
-            y1 = y0 + hauteurCellule
-            if i == 0:
-                 drawFirstTile(largeurCellule, hauteurCellule, x0, y0)
-            else:
-                couleur =  (255,255,255)
-                draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
-
-            x0 += largeurCellule
+        
+        x1 = x0 + largeurCellule
+        y1 = y0 + hauteurCellule
+        if i == 0:
+             drawFirstTile(largeurCellule, hauteurCellule, x0, y0)
+        else:
+            couleur =  (255,255,255)
+            draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+        x0 += largeurCellule
 
     x0 = tablexpos
     y0 = tableypos + hauteurCellule
     for j in range(len(valueList[0]) - 1):
-            couleur = (255,255,255)
-            x1 = x0 + largeurCellule
-            y1 = y0 + hauteurCellule
-            draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
-            y0 += hauteurCellule
+        couleur = (255,255,255)
+        x1 = x0 + largeurCellule
+        y1 = y0 + hauteurCellule
+        draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+        y0 += hauteurCellule
     
     x0 = tablexpos + largeurCellule
     y0 = tableypos + hauteurCellule
@@ -79,7 +78,7 @@ def drawTable(tablexpos,tableypos,valueList):
         draw.line([(xpos, tableypos), (xpos, tableypos + hauteurCellule * (len(valueList) + 1))], fill=(0, 0, 0))
 
     #Ecris
-    for i in range(len(valueList)):
+    for i in range(len(valueList[0])):
             xpos = tablexpos + largeurCellule + i * largeurCellule + 45
             ypos = tableypos + 30
             draw.text((xpos, ypos), str(i+1), fill=(0,0,0), font=bigGeneralFont)
@@ -123,8 +122,7 @@ def image(config : Configuration, tab: Tableau, finaldir : str, finalname: str):
     drawTable(5,200,tab.liste_proba)
 
     im.save(f"{finaldir}/{finalname}.png", "PNG")
-'''
+
 tempConf = Configuration([2,3,3],[2,3,3],True)
 tempCase = Case(0.2,5)
-image(tempConf,Tableau(tempConf,[[tempCase,tempCase],[tempCase,tempCase],[tempCase,tempCase]]),dirName,"output")
-'''
+image(tempConf,Tableau(tempConf,[[tempCase,tempCase,tempCase],[tempCase,tempCase],[tempCase,tempCase],[tempCase]]),dirName,"output")
