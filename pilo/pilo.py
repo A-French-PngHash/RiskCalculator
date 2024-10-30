@@ -10,7 +10,7 @@ from classes import Tableau, Configuration, Case
 class ImageDrawingService:
     draw : ImageDraw
 
-    def draw_data(self, tab: Tableau, finaldir : str, finalname: str):
+    def draw_data(self, tab: Tableau, finaldir : str, finalname: str, grad : bool):
         """
         Draws and saves an image displaying the data contained in `tab`.
 
