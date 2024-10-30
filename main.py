@@ -1,11 +1,11 @@
-# Computing : 
-
-from classes import Tableau, Configuration
+from classes import Configuration
 from proba_calc.proba_calc import RiskProbaCalculator
 from image.image_draw_service import ImageDrawingService
 import os
+import sys
 
-dirName= os.path.dirname(os.path.abspath(__file__))
+argument = sys.argv
+dirName = os.path.dirname(os.path.abspath(__file__))
 
 
 # Configuration
@@ -34,17 +34,19 @@ def config():
 
 
 if __name__=="__main__":
-    configuration = Configuration(
-        vaisseaux_att=[2, 1,0], 
-        vaisseaux_def=[0, 0, 0], 
-        base=False,
-        death_star=True, 
-        death_star_fight_bonus=0,
-        attack_stop_condition=0)
-    attack, defense = 40, 10
 
-    #configuration = config()
-    #attack, defense = tuple(list(map(int, input("Size of the table to generate (attack defense) : ").split(" "))))
+    if "debug" in sys.argv:
+        configuration = Configuration(
+            vaisseaux_att=[2, 1,0], 
+            vaisseaux_def=[0, 0, 0], 
+            base=False,
+            death_star=True, 
+            death_star_fight_bonus=0,
+            attack_stop_condition=0)
+        attack, defense = 10, 10
+    else:
+        configuration = config()
+        attack, defense = tuple(list(map(int, input("Size of the table to generate (attack defense) : ").split(" "))))
     
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
