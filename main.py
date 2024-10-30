@@ -30,7 +30,7 @@ def config():
 if __name__=="__main__":
     #configuration = config()
 
-    configuration = Configuration([2, 0,1], [0, 1, 0], True)
+    configuration = Configuration([2, 2,2], [0, 0, 0], False)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
     prob_table = risk_prob.compute_all(7, 7)
