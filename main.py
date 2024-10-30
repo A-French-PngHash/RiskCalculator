@@ -29,12 +29,11 @@ def config():
 
 if __name__=="__main__":
     #configuration = config()
-    
-    configuration = Configuration([2, 2, 2], [0, 0, 0], False)
+    configuration = Configuration([0, 1, 0], [0, 0, 0], False)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
-    tab = risk_prob.compute_all(40, 40)
-    print("🧑‍🎨Generating image...")
+    tab = risk_prob.compute_all(15, 15)
+    print("🧑‍🎨 Generating image...")
     image = ImageDrawingService()
 
     dir = f"{dirName}/output"
