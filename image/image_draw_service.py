@@ -2,9 +2,9 @@ from PIL import Image, ImageDraw
 if __name__=="__main__":
     from fonts import *
 else:
-    from pilo.fonts import *
+    from image.fonts import *
 import sys
-from pilo.vector import Vector
+from image.vector import Vector
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration, Case
 
@@ -34,7 +34,7 @@ class ImageDrawingService:
         self.draw.multiline_text((im.width / 2 - 140, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
         self.draw.multiline_text((im.width / 2 + 140, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 + 140,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[1]}\nBase: {'Oui' if tab.config.base else 'Non'}", font=bigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + 140,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[2]}\nBase: {'Oui' if tab.config.base else 'Non'}", font=bigGeneralFont, fill=(0, 0, 0))
         self.drawTable(5,200,tab.liste_proba)
 
         im.save(f"{finaldir}/{finalname}.png", "PNG")

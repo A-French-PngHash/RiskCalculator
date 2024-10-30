@@ -2,7 +2,7 @@
 
 from classes import Tableau, Configuration
 from proba_calc.proba_calc import RiskProbaCalculator
-from pilo.pilo import ImageDrawingService
+from image.image_draw_service import ImageDrawingService
 import os
 
 dirName= os.path.dirname(os.path.abspath(__file__))
@@ -30,10 +30,10 @@ def config():
 if __name__=="__main__":
     #configuration = config()
 
-    configuration = Configuration([0, 0, 0], [0, 0, 0], False)
+    configuration = Configuration([2, 0,1], [0, 1, 0], True)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
-    prob_table = risk_prob.compute_all(10, 10)
+    prob_table = risk_prob.compute_all(7, 7)
     print("🧑‍🎨Generating image...")
     image = ImageDrawingService()
 
