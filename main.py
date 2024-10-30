@@ -10,9 +10,7 @@ dirName= os.path.dirname(os.path.abspath(__file__))
 
 # Configuration
 def config():
-
     nb_chasseurs_at, nb_capitaux_at, nb_bombardiers_at = tuple(list(map(int, input("🚀 Vaisseaux de l'attaquant 😈 (chasseur capitaux bombardier) : ").split(" "))))
-
     nb_chasseurs_de, nb_capitaux_de, nb_bombardiers_de = tuple(list(map(int, input("🚀  Vaisseaux du défenseur 🛡️ (chasseur capitaux bombardier) : ").split(" "))))
 
     is_base_present = input("🏰 Is there an imperial base on the defender planet ? (y/n) :").lower() == "y"
@@ -20,7 +18,7 @@ def config():
     death_star_fight_bonus = 0
     if death_star:
         death_star_fight_bonus = int(input("Attack bonus (positive or negative) on the death star : "))
-        
+    
     
     configuration = Configuration(
         vaisseaux_att=[nb_capitaux_at, nb_bombardiers_at, nb_chasseurs_at],
@@ -33,12 +31,15 @@ def config():
 
 
 if __name__=="__main__":
-    #configuration = config()
-
     configuration = Configuration(vaisseaux_att=[2, 2,2], vaisseaux_def=[0, 0, 0], base=False, death_star=True, death_star_fight_bonus=1)
+    attack, defense = 10, 10
+
+    #configuration = config()
+    #attack, defense = tuple(list(map(int, input("Size of the table to generate (attack defense) : ").split(" "))))
+    
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
-    prob_table = risk_prob.compute_all(10, 10)
+    prob_table = risk_prob.compute_all(attack, defense)
     print("🧑‍🎨Generating image...")
     image = ImageDrawingService()
 
