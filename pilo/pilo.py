@@ -4,7 +4,6 @@ if __name__=="__main__":
 else:
     from pilo.fonts import *
 import sys
-from pilo.fonts import *
 from pilo.vector import Vector
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration, Case
