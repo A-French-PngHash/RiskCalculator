@@ -38,7 +38,7 @@ if __name__=="__main__":
         death_star=False, 
         death_star_fight_bonus=1,
         attack_stop_condition=3)
-    attack, defense = 10, 10
+    attack, defense = 5, 5
 
     #configuration = config()
     #attack, defense = tuple(list(map(int, input("Size of the table to generate (attack defense) : ").split(" "))))
