@@ -2,11 +2,15 @@ from math import floor
 from PIL import Image, ImageDraw
 import sys
 from pilo.fonts import *
+from pilo.vector import Vector
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration, Case
 
 class ImageDrawingService:
     draw : ImageDraw
+    use_gradient: bool = True
+    green = Vector([137, 255, 107])
+    red = Vector([255, 62, 62])
 
     def draw_data(self, tab: Tableau, finaldir : str, finalname: str):
         """
@@ -31,6 +35,21 @@ class ImageDrawingService:
         self.drawTable(5,200,tab.liste_proba)
 
         im.save(f"{finaldir}/{finalname}.png", "PNG")
+
+    def _get_color(self, percentage) -> Vector:
+        """
+        Returns the color to put in the tile depending on the percentage given.
+        """
+        if self.use_gradient:
+            return (percentage * self.green + (1 - percentage) * self.red)
+        else:
+            if percentage > 0.50:
+                return self.green
+            elif percentage < 0.50:
+                return self.red
+            else:
+                return (self.green + self.red) / 2
+            
 
     def _drawFirstTile(self, width, height, x0, y0):
         self.draw.line((x0, y0, x0 + width, y0 + height), fill = (0, 0, 0), width=1)
@@ -83,13 +102,7 @@ class ImageDrawingService:
             for j,case in enumerate(liste):
                 x1 = x0 + largeurCellule
                 y1 = y0 + hauteurCellule
-                if case.proba > 0.5:
-                    couleur = (0,255,0)
-                elif case.proba <0.5:
-                    couleur = (255,0,0)
-                else:
-                    couleur = (255,165,0)
-                self.draw.rectangle([x0, y0, x1, y1], fill=couleur, outline=couleur)
+                self.draw.rectangle([x0, y0, x1, y1], fill=self._get_color(case.proba).int_tupple_cords, outline=couleur)
                 x0 += largeurCellule
             y0 += hauteurCellule
             x0 = tablexpos + largeurCellule
