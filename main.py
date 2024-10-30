@@ -31,12 +31,25 @@ if __name__=="__main__":
     #configuration = config()
     configuration = Configuration([3, 3, 3], [0, 0, 0], False)
     risk_prob = RiskProbaCalculator(configuration)
+<<<<<<< HEAD
     tab = risk_prob.compute_all(10, 9)
+=======
+    tab = risk_prob.compute_all(5, 5)
+    image = ImageDrawingService()
+=======
+    configuration = Configuration([2, 2, 2], [0, 0, 0], False)
+    print("🏇 Calculating probabilities...")
+    risk_prob = RiskProbaCalculator(configuration)
+    tab = risk_prob.compute_all(5, 5)
+    print("🧑‍🎨Generating image...")
+>>>>>>> refs/remotes/origin/main
     image = ImageDrawingService()
 
     dir = f"{dirName}/output"
     if not os.path.exists(dir):
         os.mkdir(dir)
     numbers = [int(i[:-4]) for i in os.listdir(dir) if i[:-4].isnumeric()]
-    image.draw_data(tab, dir, str((max(numbers) if numbers != [] else 0) + 1))
+    image_name = str((max(numbers) if numbers != [] else 0) + 1)
+    image.draw_data(tab, dir, image_name)
+    print(f"💾 Image saved under the name : {image_name}.png")
 
