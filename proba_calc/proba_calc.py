@@ -1,14 +1,15 @@
+from math import floor
 import numpy as np
 
 import sys
 import os
 
+from utils import printProgressBar
+
 dirname = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f'{dirname}/../')
 
 from classes import Configuration, Tableau, Case
-
-
 
 class RiskProbaCalculator:
     configuration: Configuration
@@ -29,16 +30,19 @@ class RiskProbaCalculator:
         return np.array(np.meshgrid(*input)).T.reshape(-1, len(input))
 
 
-    def _compute_battle(self, attack: int, defense:int) -> float:
+    def _compute_battle(self, attack: int, defense:int, death_defeated = False) -> float:
         """
         Returns the probability for the attack to win and the number of soldier left in attack (if attack wins) and in defense (if defense wins).
         """
         if (defense == 0):
             return 1
-        if (attack == 0):
+        if (attack <= self.configuration.attack_stop_condition):
             return 0
-        if (attack, defense) in self.computed_probabilities:
-            return self.computed_probabilities[(attack, defense)]
+        
+        death_star_to_fight = self.configuration.death_star and not death_defeated
+
+        if (attack, defense, death_star_to_fight) in self.computed_probabilities:
+            return self.computed_probabilities[(attack, defense, death_star_to_fight)]
         
         # 5 case : 
         # attack loses 2 soldier
@@ -64,6 +68,21 @@ class RiskProbaCalculator:
 
         def_dice = self._multiply_special(defense_liste)
         att_dice = self._multiply_special(attaque_liste)
+
+        if death_star_to_fight:
+            possibilities = len(att_dice)
+            defeat_death_star = 0
+            destroyed_by_death_star = 0
+            for i in att_dice:
+                if sum(i) + self.configuration.death_star_fight_bonus < 18:
+                    destroyed_by_death_star += 1
+                else:
+                    defeat_death_star += 1
+            result = (defeat_death_star * self._compute_battle(attack, defense, death_defeated=True) +
+                    destroyed_by_death_star * self._compute_battle(max(attack - 3, 0), defense, death_defeated=False)
+            )/possibilities
+            self.computed_probabilities[(attack, defense, death_star_to_fight)] = result
+            return result
 
         possibilities = len(def_dice) * len(att_dice)
         proba = 0
@@ -120,7 +139,7 @@ class RiskProbaCalculator:
             proba = (att_lose_two * self._compute_battle(attack - 2, defense)
                     + def_lose_two * self._compute_battle(attack, defense - 2)
                     + one_each * self._compute_battle(attack - 1, defense - 1))/possibilities
-        self.computed_probabilities[(attack, defense)] = proba
+        self.computed_probabilities[(attack, defense, death_star_to_fight)] = proba
         return proba
     
     def compute_battle(self,attack : int, defense : int, reset : bool = True):
@@ -138,11 +157,13 @@ class RiskProbaCalculator:
         """
         self.computed_probabilities = {}
         cases = []
+        total_count = attack * defense
         for i in range(1, attack + 1):
             line = []
             for j in range(1, defense + 1):
                 line.append(Case(self.compute_battle(i, j, False), 0))
+                printProgressBar((i-1) * defense + j, total_count)
             cases.append(line)
+            percentage = floor(i * defense/total_count * 1000)/10
         return Tableau(self.configuration, cases)
     
-

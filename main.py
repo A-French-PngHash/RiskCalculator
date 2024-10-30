@@ -1,40 +1,65 @@
-# Computing : 
-
-from classes import Tableau, Configuration
+from classes import Configuration
 from proba_calc.proba_calc import RiskProbaCalculator
 from image.image_draw_service import ImageDrawingService
 import os
+import sys
 
-dirName= os.path.dirname(os.path.abspath(__file__))
+argument = sys.argv
+dirName = os.path.dirname(os.path.abspath(__file__))
 
 
 # Configuration
 def config():
-
-    nb_chasseurs_at = int(input("Nombre de chasseurs de l'attaquant :"))
-    nb_chasseurs_de = int(input("Nombre de chasseurs du défenseur :"))
-    nb_bombardiers_at = int(input("Nombre de bombardiers de l'attaquant :"))
-    nb_bombardiers_de = int(input("Nombre de bombardiers du défenseur :"))
-    nb_capitaux_at = int(input("Nombre de vaisseaux capitaux de l'attaquant :"))
-    nb_capitaux_de = int(input("Nombre de vaisseaux capitaux du défenseur :"))
-    is_base_present = input("Le défenseur a_t_il une base impériale ? Y/N :")
-    if is_base_present=="Y":
-        is_base_present = True
-    else:
-        is_base_present = False
+    nb_chasseurs_at, nb_capitaux_at, nb_bombardiers_at = tuple(list(map(int, input("🚀 Vaisseaux de l'attaquant 😈 (chasseur capitaux bombardier) : ").split(" "))))
+    nb_chasseurs_de, nb_capitaux_de, nb_bombardiers_de = tuple(list(map(int, input("🚀  Vaisseaux du défenseur 🛡️ (chasseur capitaux bombardier) : ").split(" "))))
     
-    configuration = Configuration([nb_capitaux_at, nb_bombardiers_at, nb_chasseurs_at],[nb_capitaux_de, nb_bombardiers_de, nb_chasseurs_de], is_base_present)
+    attack_stop_condition = int(input("Enter the amount of soldier under which you do not want to continue the attack (minimum amount of soldier left): "))
+
+    is_base_present = input("🏰 Is there an imperial base on the defender planet ? (y/n) :").lower() == "y"
+    death_star = input("⚡ Is there a death star on the defender planet ? (y/n) : ").lower() == "y"
+    death_star_fight_bonus = 0
+    if death_star:
+        death_star_fight_bonus = int(input("Attack bonus (positive or negative) on the death star : "))
+    
+    
+    configuration = Configuration(
+        vaisseaux_att=[nb_capitaux_at, nb_bombardiers_at, nb_chasseurs_at],
+        vaisseaux_def=[nb_capitaux_de, nb_bombardiers_de, nb_chasseurs_de], 
+        base=is_base_present,
+        death_star=death_star,
+        death_star_fight_bonus=death_star_fight_bonus,
+        attack_stop_condition=attack_stop_condition
+        )
     return configuration
 
 
 if __name__=="__main__":
-    #configuration = config()
 
+<<<<<<< HEAD
     configuration = Configuration([0, 0, 0], [0, 0, 0], False)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
     prob_table = risk_prob.compute_all(20, 20)
     print("🧑‍🎨Generating image...")
+=======
+    if "debug" in sys.argv:
+        configuration = Configuration(
+            vaisseaux_att=[2, 1,0], 
+            vaisseaux_def=[0, 0, 0], 
+            base=False,
+            death_star=True, 
+            death_star_fight_bonus=0,
+            attack_stop_condition=0)
+        attack, defense = 10, 10
+    else:
+        configuration = config()
+        attack, defense = tuple(list(map(int, input("Size of the table to generate (attack defense) : ").split(" "))))
+    
+    print("🏇 Calculating probabilities...")
+    risk_prob = RiskProbaCalculator(configuration)
+    prob_table = risk_prob.compute_all(attack, defense)
+    print("🎨 Generating image...")
+>>>>>>> refs/remotes/origin/main
     image = ImageDrawingService()
 
     dir = f"{dirName}/output"
