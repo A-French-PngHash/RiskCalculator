@@ -12,6 +12,8 @@ dirName= os.path.dirname(os.path.abspath(__file__))
 def config():
     nb_chasseurs_at, nb_capitaux_at, nb_bombardiers_at = tuple(list(map(int, input("🚀 Vaisseaux de l'attaquant 😈 (chasseur capitaux bombardier) : ").split(" "))))
     nb_chasseurs_de, nb_capitaux_de, nb_bombardiers_de = tuple(list(map(int, input("🚀  Vaisseaux du défenseur 🛡️ (chasseur capitaux bombardier) : ").split(" "))))
+    
+    attack_stop_condition = int(input("Enter the amount of soldier under which you do not want to continue the attack (minimum amount of soldier left): "))
 
     is_base_present = input("🏰 Is there an imperial base on the defender planet ? (y/n) :").lower() == "y"
     death_star = input("⚡ Is there a death star on the defender planet ? (y/n) : ").lower() == "y"
@@ -26,19 +28,20 @@ def config():
         base=is_base_present,
         death_star=death_star,
         death_star_fight_bonus=death_star_fight_bonus,
+        attack_stop_condition=attack_stop_condition
         )
     return configuration
 
 
 if __name__=="__main__":
     configuration = Configuration(
-        vaisseaux_att=[0, 0,0], 
+        vaisseaux_att=[2, 1,0], 
         vaisseaux_def=[0, 0, 0], 
         base=False,
-        death_star=False, 
-        death_star_fight_bonus=1,
-        attack_stop_condition=3)
-    attack, defense = 5, 5
+        death_star=True, 
+        death_star_fight_bonus=0,
+        attack_stop_condition=0)
+    attack, defense = 40, 10
 
     #configuration = config()
     #attack, defense = tuple(list(map(int, input("Size of the table to generate (attack defense) : ").split(" "))))

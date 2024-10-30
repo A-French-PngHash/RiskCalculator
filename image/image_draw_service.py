@@ -28,19 +28,24 @@ class ImageDrawingService:
             WARNING : Will overide an image if it already exists under the same name.
         """
         self.use_gradient = use_gradient
-        im = Image.new("RGB", (max(500, 110+ self.largeurCellule*(len(tab.liste_proba[0]))+1), max(500, 305 + self.hauteurCellule*(len(tab.liste_proba) + 1))), "white")
+        im = Image.new("RGB", (max(1000, 110+ self.largeurCellule*(len(tab.liste_proba[0]))+1), max(500, 305 + self.hauteurCellule*(len(tab.liste_proba) + 1))), "white")
         self.draw = ImageDraw.Draw(im)
             
-        att_def_distance = 340
+        att_def_distance = 400
         offset = -60
-        self.draw.multiline_text((im.width / 2 - att_def_distance / 2 + offset, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 - att_def_distance / 2 + offset, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-        distance_def = 180
+        distance_column = 180
+        # Attack configuration
+        self.draw.multiline_text((im.width / 2 - att_def_distance / 2 + offset, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 - att_def_distance / 2 + offset - distance_column / 2, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 - att_def_distance / 2 + offset + distance_column / 2, 50), f"Min Soldiers: {tab.config.attack_stop_condition}", font=bigGeneralFont, fill=(0, 0, 0))
+
+        # Defense configuration
         self.draw.multiline_text((im.width / 2 + att_def_distance / 2 + offset, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 + att_def_distance / 2 - distance_def/2 + offset,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[2]}", font=bigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 + att_def_distance / 2 + distance_def / 2 + offset,50), f"Base: {'Yes' if tab.config.base else 'No'}\nDeath Star: {'Yes' if tab.config.death_star else 'No'}\nAttack Bonus: {tab.config.death_star_fight_bonus}", font=bigGeneralFont, fill=(0, 0, 0))
-        self.drawTable(5,200,tab.liste_proba, tab.config)
+        self.draw.multiline_text((im.width / 2 + att_def_distance / 2 - distance_column/2 + offset,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[2]}", font=bigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + att_def_distance / 2 + distance_column / 2 + offset,50), f"Base: {'Yes' if tab.config.base else 'No'}\nDeath Star: {'Yes' if tab.config.death_star else 'No'}\nAttack Bonus: {tab.config.death_star_fight_bonus}", font=bigGeneralFont, fill=(0, 0, 0))
+        
+        self.drawTable((im.size[0] - self.largeurCellule * (len(tab.liste_proba[0]) + 1 ))/2,200,tab.liste_proba, tab.config)
 
         im.save(f"{finaldir}/{finalname}.png", "PNG")
 

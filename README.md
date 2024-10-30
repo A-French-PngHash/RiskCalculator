@@ -14,9 +14,9 @@ There are 2 main components in the program :
 
 <img src=Example/1.png width=400>
 
-In this first example we can see that no side is much stronger than the other, this attack is quite balanced.
+In this first example we can see that no side is much stronger than the other, the fight is balanced. Here the attacker stops when he has less than 2 soldiers left.
 
 
 <img src=Example/2.png width=400>
 
-On the other hand, this second example shows a situation where the attack (thanks to its many ships) completely overruns the defense. At 3 against 7 there is an astonishing **77.9%** win rate for the attack!
+This second example shows a situation where the attack (thanks to its many ships) completely overruns the defense. At 3 against 7 there is an astonishing **77.9%** win rate for the attack!
