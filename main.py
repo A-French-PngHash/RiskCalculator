@@ -33,12 +33,12 @@ def config():
 
 
 if __name__=="__main__":
-    configuration = config()
+    #configuration = config()
 
-    #configuration = Configuration(vaisseaux_att=[2, 2,2], vaisseaux_def=[0, 0, 0], base=False, death_star=True, death_star_fight_bonus=1)
+    configuration = Configuration(vaisseaux_att=[2, 2,2], vaisseaux_def=[0, 0, 0], base=False, death_star=True, death_star_fight_bonus=1)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
-    prob_table = risk_prob.compute_all(40, 7)
+    prob_table = risk_prob.compute_all(10, 10)
     print("🧑‍🎨Generating image...")
     image = ImageDrawingService()
 

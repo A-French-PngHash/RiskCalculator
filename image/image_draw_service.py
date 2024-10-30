@@ -29,12 +29,14 @@ class ImageDrawingService:
         im = Image.new("RGB", (max(500, 110+ 100*len(tab.liste_proba[0])), max(500, 305 + 100*len(tab.liste_proba))), "white")
         self.draw = ImageDraw.Draw(im)
             
+        att_def_distance = 340
+        self.draw.multiline_text((im.width / 2 - att_def_distance / 2, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 - att_def_distance / 2, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
 
-        self.draw.multiline_text((im.width / 2 - 140, 5), "Attaque", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 - 140, 50), f"Capital: {tab.config.vaisseaux_att[0]}\nBombardier: {tab.config.vaisseaux_att[1]}\nChasseur: {tab.config.vaisseaux_att[2]}", font=bigGeneralFont, fill=(0, 0, 0))
-
-        self.draw.multiline_text((im.width / 2 + 140, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 + 140,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[2]}\nBase: {'Oui' if tab.config.base else 'Non'}", font=bigGeneralFont, fill=(0, 0, 0))
+        distance_def = 180
+        self.draw.multiline_text((im.width / 2 + att_def_distance / 2, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + att_def_distance / 2 - distance_def/2,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[2]}", font=bigGeneralFont, fill=(0, 0, 0))
+        self.draw.multiline_text((im.width / 2 + att_def_distance / 2 + distance_def / 2,50), f"Base: {'Yes' if tab.config.base else 'No'}\nDeath Star: {'Yes' if tab.config.death_star else 'No'}\nAttack Bonus: {tab.config.death_star_fight_bonus}", font=bigGeneralFont, fill=(0, 0, 0))
         self.drawTable(5,200,tab.liste_proba)
 
         im.save(f"{finaldir}/{finalname}.png", "PNG")
