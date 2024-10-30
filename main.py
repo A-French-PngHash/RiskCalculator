@@ -31,8 +31,14 @@ def config():
 
 
 if __name__=="__main__":
-    configuration = Configuration(vaisseaux_att=[2, 2,2], vaisseaux_def=[0, 0, 0], base=False, death_star=True, death_star_fight_bonus=1)
-    attack, defense = 5, 5
+    configuration = Configuration(
+        vaisseaux_att=[0, 0,0], 
+        vaisseaux_def=[0, 0, 0], 
+        base=False,
+        death_star=False, 
+        death_star_fight_bonus=1,
+        attack_stop_condition=3)
+    attack, defense = 10, 10
 
     #configuration = config()
     #attack, defense = tuple(list(map(int, input("Size of the table to generate (attack defense) : ").split(" "))))

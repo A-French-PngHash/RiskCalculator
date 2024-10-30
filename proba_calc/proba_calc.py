@@ -36,7 +36,7 @@ class RiskProbaCalculator:
         """
         if (defense == 0):
             return 1
-        if (attack == 0):
+        if (attack <= self.configuration.attack_stop_condition):
             return 0
         
         death_star_to_fight = self.configuration.death_star and not death_defeated
@@ -139,7 +139,7 @@ class RiskProbaCalculator:
             proba = (att_lose_two * self._compute_battle(attack - 2, defense)
                     + def_lose_two * self._compute_battle(attack, defense - 2)
                     + one_each * self._compute_battle(attack - 1, defense - 1))/possibilities
-        self.computed_probabilities[(attack, defense)] = proba
+        self.computed_probabilities[(attack, defense, death_star_to_fight)] = proba
         return proba
     
     def compute_battle(self,attack : int, defense : int, reset : bool = True):
