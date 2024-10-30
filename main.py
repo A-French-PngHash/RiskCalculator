@@ -32,7 +32,7 @@ def config():
 
 if __name__=="__main__":
     configuration = Configuration(vaisseaux_att=[2, 2,2], vaisseaux_def=[0, 0, 0], base=False, death_star=True, death_star_fight_bonus=1)
-    attack, defense = 10, 10
+    attack, defense = 5, 5
 
     #configuration = config()
     #attack, defense = tuple(list(map(int, input("Size of the table to generate (attack defense) : ").split(" "))))
@@ -40,7 +40,7 @@ if __name__=="__main__":
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
     prob_table = risk_prob.compute_all(attack, defense)
-    print("🧑‍🎨Generating image...")
+    print("🎨 Generating image...")
     image = ImageDrawingService()
 
     dir = f"{dirName}/output"

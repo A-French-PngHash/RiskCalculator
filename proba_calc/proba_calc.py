@@ -1,7 +1,10 @@
+from math import floor
 import numpy as np
 
 import sys
 import os
+
+from utils import printProgressBar
 
 dirname = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(f'{dirname}/../')
@@ -154,11 +157,13 @@ class RiskProbaCalculator:
         """
         self.computed_probabilities = {}
         cases = []
+        total_count = attack * defense
         for i in range(1, attack + 1):
             line = []
             for j in range(1, defense + 1):
                 line.append(Case(self.compute_battle(i, j, False), 0))
+                printProgressBar((i-1) * defense + j, total_count)
             cases.append(line)
+            percentage = floor(i * defense/total_count * 1000)/10
         return Tableau(self.configuration, cases)
     
-
