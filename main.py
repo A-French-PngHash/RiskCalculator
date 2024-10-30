@@ -33,7 +33,7 @@ if __name__=="__main__":
     configuration = Configuration([0, 0, 0], [0, 0, 0], False)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
-    tab = risk_prob.compute_all(10, 10)
+    prob_table = risk_prob.compute_all(10, 10)
     print("🧑‍🎨Generating image...")
     image = ImageDrawingService()
 
