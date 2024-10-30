@@ -17,23 +17,24 @@ def config():
     nb_bombardiers_de = int(input("Nombre de bombardiers du défenseur :"))
     nb_capitaux_at = int(input("Nombre de vaisseaux capitaux de l'attaquant :"))
     nb_capitaux_de = int(input("Nombre de vaisseaux capitaux du défenseur :"))
-    base = input("Le défenseur a_t_il une base impériale ? Y/N :")
-    if base=="Y":
-        base = True
+    is_base_present = input("Le défenseur a_t_il une base impériale ? Y/N :")
+    if is_base_present=="Y":
+        is_base_present = True
     else:
-        base = False
+        is_base_present = False
     
-    configuration = Configuration([nb_capitaux_at, nb_bombardiers_at, nb_chasseurs_at],[nb_capitaux_de, nb_bombardiers_de, nb_chasseurs_de], base)
+    configuration = Configuration([nb_capitaux_at, nb_bombardiers_at, nb_chasseurs_at],[nb_capitaux_de, nb_bombardiers_de, nb_chasseurs_de], is_base_present)
     return configuration
 
 
 if __name__=="__main__":
     #configuration = config()
-    configuration = Configuration([0, 1, 0], [0, 0, 0], False)
+
+    configuration = Configuration([0, 0, 0], [0, 0, 0], False)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
-    tab = risk_prob.compute_all(15, 15)
-    print("🧑‍🎨 Generating image...")
+    prob_table = risk_prob.compute_all(10, 10)
+    print("🧑‍🎨Generating image...")
     image = ImageDrawingService()
 
     dir = f"{dirName}/output"
@@ -41,6 +42,6 @@ if __name__=="__main__":
         os.mkdir(dir)
     numbers = [int(i[:-4]) for i in os.listdir(dir) if i[:-4].isnumeric()]
     image_name = str((max(numbers) if numbers != [] else 0) + 1)
-    image.draw_data(tab=tab, finaldir=dir, finalname=image_name, use_gradient=True)
+    image.draw_data(tab=prob_table, finaldir=dir, finalname=image_name, use_gradient=True)
     print(f"💾 Image saved under the name : {image_name}.png")
 
