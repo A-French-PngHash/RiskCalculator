@@ -125,4 +125,4 @@ tempConf = Configuration([2,3,3],[2,3,3],True)
 tempCase = Case(0.7,5)
 service = ImageDrawingService()
 cases =  [tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase]
-service.draw_data(Tableau(tempConf,[cases, cases, cases]),dirName,"output")
+service.draw_data(Tableau(tempConf,[cases, cases, cases]),dirName,"output", False)
