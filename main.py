@@ -29,15 +29,11 @@ def config():
 
 if __name__=="__main__":
     #configuration = config()
-    
-    configuration = Configuration([2, 2, 2], [0, 0, 0], False)
+
+    configuration = Configuration([0, 0, 0], [0, 0, 0], False)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
-<<<<<<< HEAD
     tab = risk_prob.compute_all(10, 10)
-=======
-    tab = risk_prob.compute_all(40, 40)
->>>>>>> refs/remotes/origin/main
     print("🧑‍🎨Generating image...")
     image = ImageDrawingService()
 
