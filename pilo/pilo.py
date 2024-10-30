@@ -1,7 +1,9 @@
-from math import floor
 from PIL import Image, ImageDraw
+if __name__=="__main__":
+    from fonts import *
+else:
+    from pilo.fonts import *
 import sys
-from pilo.fonts import *
 sys.path.append(f'{dirName}/../')
 from classes import Tableau, Configuration, Case
 
@@ -120,9 +122,9 @@ class ImageDrawingService:
                 ypos = tableypos + hauteurCellule + i * hauteurCellule + 30
                 self.draw.text((xpos, ypos), str(round(round(column.proba, 3)*100,3))+"%", fill=(0,0,0), font=bigGeneralFont)
 
-
-tempConf = Configuration([2,3,3],[2,3,3],True)
-tempCase = Case(0.7,5)
-service = ImageDrawingService()
-cases =  [tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase]
-service.draw_data(Tableau(tempConf,[cases, cases, cases]),dirName,"output")
+if __name__=="__main__":
+    tempConf = Configuration([2,3,3],[2,3,3],True)
+    tempCase = Case(0.7,5)
+    service = ImageDrawingService()
+    cases =  [tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase,tempCase]
+    service.draw_data(Tableau(tempConf,[cases, cases, cases]),dirName,"output")

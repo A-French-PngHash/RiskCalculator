@@ -29,20 +29,13 @@ def config():
 
 if __name__=="__main__":
     #configuration = config()
-<<<<<<< HEAD
-    configuration = Configuration([0, 0, 0], [0, 0, 0], False)
-    risk_prob = RiskProbaCalculator(configuration)
-    tab = risk_prob.compute_all(5, 5)
-    image = ImageDrawingService()
-=======
-    configuration = Configuration([2, 2, 2], [0, 0, 0], False)
+    configuration = Configuration([2, 3, 3], [0, 0, 0], False)
     print("🏇 Calculating probabilities...")
     risk_prob = RiskProbaCalculator(configuration)
-    tab = risk_prob.compute_all(5, 5)
+    tab = risk_prob.compute_all(40, 40)
     print("🧑‍🎨Generating image...")
     image = ImageDrawingService()
 
->>>>>>> refs/remotes/origin/main
     dir = f"{dirName}/output"
     if not os.path.exists(dir):
         os.mkdir(dir)
