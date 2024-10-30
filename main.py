@@ -42,6 +42,6 @@ if __name__=="__main__":
         os.mkdir(dir)
     numbers = [int(i[:-4]) for i in os.listdir(dir) if i[:-4].isnumeric()]
     image_name = str((max(numbers) if numbers != [] else 0) + 1)
-    image.draw_data(prob_table, dir, image_name, False)
+    image.draw_data(tab=prob_table, finaldir=dir, finalname=image_name, use_gradient=True)
     print(f"💾 Image saved under the name : {image_name}.png")
 
