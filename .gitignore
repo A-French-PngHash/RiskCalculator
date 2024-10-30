@@ -172,7 +172,7 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
-pilo/output.png
+image/output.png
 
 # End of https://www.toptal.com/developers/gitignore/api/python
 output/
