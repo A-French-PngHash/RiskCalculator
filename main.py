@@ -35,13 +35,6 @@ def config():
 
 if __name__=="__main__":
 
-<<<<<<< HEAD
-    configuration = Configuration([0, 0, 0], [0, 0, 0], False)
-    print("🏇 Calculating probabilities...")
-    risk_prob = RiskProbaCalculator(configuration)
-    prob_table = risk_prob.compute_all(20, 20)
-    print("🧑‍🎨Generating image...")
-=======
     if "debug" in sys.argv:
         configuration = Configuration(
             vaisseaux_att=[2, 1,0], 
@@ -59,7 +52,6 @@ if __name__=="__main__":
     risk_prob = RiskProbaCalculator(configuration)
     prob_table = risk_prob.compute_all(attack, defense)
     print("🎨 Generating image...")
->>>>>>> refs/remotes/origin/main
     image = ImageDrawingService()
 
     dir = f"{dirName}/output"
