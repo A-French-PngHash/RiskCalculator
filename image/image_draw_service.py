@@ -43,8 +43,10 @@ class ImageDrawingService:
         # Defense configuration
         self.draw.multiline_text((im.width / 2 + att_def_distance / 2 + offset, 5), "Défense", font=bigBigGeneralFont, fill=(0, 0, 0))
         self.draw.multiline_text((im.width / 2 + att_def_distance / 2 - distance_column/2 + offset,50), f"Capital: {tab.config.vaisseaux_def[0]}\nBombardier: {tab.config.vaisseaux_def[1]}\nChasseur: {tab.config.vaisseaux_def[2]}", font=bigGeneralFont, fill=(0, 0, 0))
-        self.draw.multiline_text((im.width / 2 + att_def_distance / 2 + distance_column / 2 + offset,50), f"Base: {'Yes' if tab.config.base else 'No'}\nDeath Star: {'Yes' if tab.config.death_star else 'No'}\nAttack Bonus: {tab.config.death_star_fight_bonus}", font=bigGeneralFont, fill=(0, 0, 0))
-        
+        if tab.config.death_star:
+            self.draw.multiline_text((im.width / 2 + att_def_distance / 2 + distance_column / 2 + offset,50), f"Base: {'Yes' if tab.config.base else 'No'}\nDeath Star: {'Yes' if tab.config.death_star else 'No'}\nAttack Bonus: {tab.config.death_star_fight_bonus}", font=bigGeneralFont, fill=(0, 0, 0))
+        else:
+            self.draw.multiline_text((im.width / 2 + att_def_distance / 2 + distance_column / 2 + offset,50), f"Base: {'Yes' if tab.config.base else 'No'}\nDeath Star: {'Yes' if tab.config.death_star else 'No'}", font=bigGeneralFont, fill=(0, 0, 0))
         self.drawTable((im.size[0] - self.largeurCellule * (len(tab.liste_proba[0]) + 1 ))/2,200,tab.liste_proba, tab.config)
 
         im.save(f"{finaldir}/{finalname}.png", "PNG")
