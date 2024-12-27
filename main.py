@@ -10,12 +10,12 @@ dirName = os.path.dirname(os.path.abspath(__file__))
 
 # Configuration
 def config():
-    nb_chasseurs_at, nb_capitaux_at, nb_bombardiers_at = tuple(list(map(int, input("🚀 Vaisseaux de l'attaquant 😈 (chasseur capitaux bombardier) : ").split(" "))))
-    nb_chasseurs_de, nb_capitaux_de, nb_bombardiers_de = tuple(list(map(int, input("🚀  Vaisseaux du défenseur 🛡️ (chasseur capitaux bombardier) : ").split(" "))))
+    nb_capitaux_at, nb_bombardiers_at, nb_chasseurs_at = tuple(list(map(int, input("🚀 Vaisseaux de l'attaquant 😈 (capitaux bombardier chasseur) : ").split(" "))))
+    nb_capitaux_de, nb_bombardiers_de, nb_chasseurs_de = tuple(list(map(int, input("🚀  Vaisseaux du défenseur 🛡️ (capitaux bombardier chasseur) : ").split(" "))))
     
     attack_stop_condition = int(input("Enter the amount of soldier under which you do not want to continue the attack (minimum amount of soldier left): "))
 
-    is_base_present = input("🏰 Is there an imperial base on the defender planet ? (y/n) :").lower() == "y"
+    is_base_present = input("🏰 Is there an imperial base on the defender planet ? (y/n) : ").lower() == "y"
     death_star = input("⚡ Is there a death star on the defender planet ? (y/n) : ").lower() == "y"
     death_star_fight_bonus = 0
     if death_star:
@@ -34,17 +34,9 @@ def config():
 
 
 if __name__=="__main__":
-
-<<<<<<< HEAD
-    configuration = Configuration([0, 0, 0], [0, 0, 0], False)
-    print("🏇 Calculating probabilities...")
-    risk_prob = RiskProbaCalculator(configuration)
-    prob_table = risk_prob.compute_all(20, 20)
-    print("🧑‍🎨Generating image...")
-=======
     if "debug" in sys.argv:
         configuration = Configuration(
-            vaisseaux_att=[2, 1,0], 
+            vaisseaux_att=[2, 1, 0], 
             vaisseaux_def=[0, 0, 0], 
             base=False,
             death_star=True, 
@@ -59,7 +51,6 @@ if __name__=="__main__":
     risk_prob = RiskProbaCalculator(configuration)
     prob_table = risk_prob.compute_all(attack, defense)
     print("🎨 Generating image...")
->>>>>>> refs/remotes/origin/main
     image = ImageDrawingService()
 
     dir = f"{dirName}/output"
@@ -69,4 +60,3 @@ if __name__=="__main__":
     image_name = str((max(numbers) if numbers != [] else 0) + 1)
     image.draw_data(tab=prob_table, finaldir=dir, finalname=image_name, use_gradient=True)
     print(f"💾 Image saved under the name : {image_name}.png")
-

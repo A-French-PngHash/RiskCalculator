@@ -2,7 +2,7 @@
 
 ## Presentation
 
-In Risk - Star Wars, the empire and rebels fight against each other in an effort to gain control of the galaxy. Battles involve different units such as : soldiers, starships (bombers, capital ship...), death star... The issue of the battle is then determined with dice rolls. This tool gives the opportunity for a player to analyse such a battle by displaying the probabilities of an attack wining depending on the number of attacker and defender.
+In [Risk: Star Wars – Original Trilogy Edition](https://en.wikipedia.org/wiki/Star_Wars_Risk:_The_Original_Trilogy_Edition), the empire and rebels fight against each other in an effort to gain control of the galaxy. Battles involve different units such as : soldiers, starships (bombers, capital ship...), death star... The issue of the battle is then determined with dice rolls. This tool gives the opportunity for a player to analyse such a battle by displaying the probability of an attack winning depending on the number of attackers and defenders.
 
 ## Structure
 
